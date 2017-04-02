@@ -22,5 +22,9 @@
 * __Note__
   * Disabling addons by deleting their files is now depricated.
   * Files with '$' in their names are subclasses, you cannot disable these, they are part of another addon.
-  * The GlassColor and ClayColor addons both require Flowers
+* Addons that have prereqs.
+  * The GlassColor addon requires the Glass and the Flowers addons.
+  * The ClayColor addon requires the Clay and the Flowers addons.
+  * The ClaySubBlocks addon requires the Clay addon.
+  
 
