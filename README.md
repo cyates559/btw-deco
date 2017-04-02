@@ -19,3 +19,8 @@
 * The addons are listed in the file separated by spaces.
 * The names of the addons correspond to the class files that you've placed inside your jars.  For example, "HayBale" corresponds to "Addon_HayBale.class"
 * Some addons require other addons to be loaded.  If you attempt to load an addon before it's prequisites have been met, the addon will fail to load and print an error in the log.
+* __Note__
+ * Disabling addons by deleting their files is now depricated.
+ * Files with '$' in their names are subclasses, you cannot disable these, they are part of another addon.
+ * The GlassColor and ClayColor addons both require Flowers
+
