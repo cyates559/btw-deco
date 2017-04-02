@@ -26,5 +26,3 @@
   * The GlassColor addon requires the Glass and the Flowers addons.
   * The ClayColor addon requires the Clay and the Flowers addons.
   * The ClaySubBlocks addon requires the Clay addon.
-  
-
