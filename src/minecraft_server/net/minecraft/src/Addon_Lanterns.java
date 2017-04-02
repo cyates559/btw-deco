@@ -11,13 +11,17 @@ public class Addon_Lanterns
 	public Addon_Lanterns()
 	{
 		FCBetterThanWolves.fcAestheticNonOpaque = new FCBlockAestheticNonOpaque_LightningRodFix(AddonManager.ReplaceBlockID(FCBetterThanWolves.fcAestheticNonOpaque));
-		paperWall = (BlockPane)(new FCBlockPane(3000, "ginger_panel_paperwall_face", "ginger_panel_paperwall_side", Material.wood, true)).setHardness(0.3F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("paperWall").setCreativeTab(CreativeTabs.tabDecorations);
+		paperWall = new BlockPaperWall(3000);
 		fenceSteel = new BlockFenceSteel(3001);
 
-		lanternPaper = new BlockLanternPaper(2027);
-		lanternGold = new BlockLanternGold(2028);
-		//lanternSteel = new BlockLanternSteel(3029);
+		lanternPaper = new BlockLantern(3027,Material.wood,.3F,"paper","Firefly Lantern",true).setStepSound(Block.soundWoodFootstep);
+		ItemAxe.SetAllAxesToBeEffectiveVsBlock(lanternPaper);
+		lanternGold = new BlockLanternGold(3028);
+		lanternSteel = new BlockLantern(3029,Material.iron,.5F,"steel","Wrought Iron Lantern").setStepSound(Block.soundStoneFootstep);
+		ItemPickaxe.SetAllPicksToBeEffectiveVsBlock(lanternPaper);
+
 		bottleHempOil = new Item(30007).setUnlocalizedName("ginger_bottle_hempoil").setCreativeTab(CreativeTabs.tabMaterials);
+
 		AddonManager.Register(paperWall, "Paper Wall");
 		AddonManager.Register(fenceSteel, "Wrought Iron Bars");
 		AddonManager.Name(bottleHempOil, "Hemp Oil");
@@ -27,10 +31,10 @@ public class Addon_Lanterns
 		FCRecipes.AddAnvilRecipe(new ItemStack(fenceSteel, 10), new Object[] { " X X", "XXXX", " X X", " X X", 'X', new ItemStack(Item.ingotIron) });
 		
 		FCRecipes.AddShapelessVanillaRecipe(new ItemStack(bottleHempOil,1), new Object[]{Item.glassBottle, FCBetterThanWolves.fcHempSeeds});
-		FCRecipes.AddVanillaRecipe(new ItemStack(lanternPaper,1),new Object[]{"pwp","whw","pwp",'h', bottleHempOil, 'p', Item.paper, 'w', new ItemStack(FCBetterThanWolves.fcBlockWoodMouldingItemStubID, 1, 32767)});
+		FCRecipes.AddVanillaRecipe(new ItemStack(lanternPaper,1),new Object[]{"pwp","wcw","pwp",'c', new ItemStack(FCBetterThanWolves.fcItemCandle,1,32767), 'p', Item.paper, 'w', new ItemStack(FCBetterThanWolves.fcBlockWoodMouldingItemStubID, 1, 32767)});
 		FCRecipes.AddAnvilRecipe(new ItemStack(lanternGold,2), new Object[]{" ss "," gg ","cggc","cggc",'s',Block.stone,'g',Item.goldNugget,'c', new ItemStack(FCBetterThanWolves.fcItemCandle,1,32767)});
-		//FCRecipes.AddVanillaRecipe(new ItemStack(lanternSteel,1),new Object[]{" s ","shs"," s ",'s',fenceSteel,'h',bottleHempOil});
-		//FCRecipes.AddStokedCrucibleRecipe(new ItemStack(Item.ingotIron,4), new ItemStack[]{new ItemStack(lanternSteel,1)});
+		FCRecipes.AddVanillaRecipe(new ItemStack(lanternSteel,1),new Object[]{" s ","shs"," s ",'s',fenceSteel,'h',bottleHempOil});
+		FCRecipes.AddStokedCrucibleRecipe(new ItemStack(Item.ingotIron,4), new ItemStack[]{new ItemStack(lanternSteel,1)});
 	}
 	public static class BlockLanternGold extends Block
 	{
@@ -50,27 +54,58 @@ public class Addon_Lanterns
 		{
 			return false;
 		}
-	}
-	public static class BlockLanternPaper extends Block implements FCIBlock
-	{
-		Icon TopIcon;
-		public BlockLanternPaper(int ID)
+		public boolean renderAsNormalBlock()
 		{
-			super(ID, Material.wood);
-			setUnlocalizedName("ginger_lantern_paper");
-			setHardness(0.3F);
+			return false;
+		}
+		public int getRenderType()
+		{
+			return 1;
+		}
+		public void randomDisplayTick(World CurrentWorld, int X_, int Y_, int Z_, Random par5Random)
+		{
+
+			float H = .55F, L = .15F, X = (float)X_, Y = (float)Y_, Z = (float)Z_;
+
+			CurrentWorld.spawnParticle("smoke", X+L, Y+H, Z+L, 0.0D, 0.0D, 0.0D);
+			CurrentWorld.spawnParticle("flame", X+L, Y+H, Z+L, 0.0D, 0.0D, 0.0D);
+
+			CurrentWorld.spawnParticle("smoke", X+1F-L, Y+H, Z+L, 0.0D, 0.0D, 0.0D);
+			CurrentWorld.spawnParticle("flame", X+1F-L, Y+H, Z+L, 0.0D, 0.0D, 0.0D);
+
+			CurrentWorld.spawnParticle("smoke", X+L, Y+H, Z+1F-L, 0.0D, 0.0D, 0.0D);
+			CurrentWorld.spawnParticle("flame", X+L, Y+H, Z+1F-L, 0.0D, 0.0D, 0.0D);
+
+			CurrentWorld.spawnParticle("smoke", X+1F-L, Y+H, Z+1F-L, 0.0D, 0.0D, 0.0D);
+			CurrentWorld.spawnParticle("flame", X+1F-L, Y+H, Z+1F-L, 0.0D, 0.0D, 0.0D);
+		}
+	}
+	public static class BlockLantern extends Block implements FCIBlock
+	{
+		String tag;
+		boolean animate;
+		public BlockLantern(int ID, Material material,float hardness, String tag, String name){this(ID,material,hardness,tag,name,false);}
+		public BlockLantern(int ID, Material material,float hardness, String tag, String name,boolean animate)
+		{
+			super(ID, material);
+			this.tag=tag;
+			this.animate=animate;
+			setUnlocalizedName("ginger_lantern_"+tag);
 			setCreativeTab(CreativeTabs.tabDecorations);
-			setStepSound(soundWoodFootstep);
+			setHardness(hardness);
 			setLightValue(1F);
-			setBlockBounds(.3125F, 0F, .3125F, .6875F, .5F, .6875F);
-			AddonManager.Register(this, "Firefly Lantern");
-			ItemAxe.SetAllAxesToBeEffectiveVsBlock(this);
+			//setBlockBounds(.3125F, 0F, .3125F, .6875F, .5F, .6875F);
+			AddonManager.Register(this, name);
 			FCBlockAestheticNonOpaque_LightningRodFix.AddHoldableBlock(this);
 		}
 		public int onBlockPlaced(World var1, int var2, int var3, int var4, int var5, float var6, float var7, float var8, int var9)
 		{
 			setBlockBoundsBasedOnState(var1, var2, var3,var4);
 			return SetFacingInMetadata(var9, var5);
+		}
+		public boolean renderAsNormalBlock()
+		{
+			return false;
 		}
 		public void setBlockBoundsBasedOnState(IBlockAccess Access, int X, int Y, int Z)
 		{
@@ -90,13 +125,17 @@ public class Addon_Lanterns
 			switch (GetFacing(CurrentWorld, X, Y, Z))
 			{
 				default:
-				case 0: return AxisAlignedBB.getAABBPool().getAABB(X+.3125D,Y+.5D,Z+.3125D,X+.6875D,Y+1D,Z+.6875D);
-				case 1: return AxisAlignedBB.getAABBPool().getAABB(X+.3125D,Y,.3125D,X+.6875D,Y+.5D,Z+.6875D);
-				case 2: return AxisAlignedBB.getAABBPool().getAABB(X+.3125D,Y,Z+.625D,X+.6875D,Y+.5D,Z+1D);
-				case 3: return AxisAlignedBB.getAABBPool().getAABB(X+.3125D,Y,Z,X+.6875D,Y+.5D,Z+.375D);
-				case 4: return AxisAlignedBB.getAABBPool().getAABB(X+.625D,Y,Z+.3125D,X+1D,Y+.5D,Z+.6875D);
-				case 5: return AxisAlignedBB.getAABBPool().getAABB(X,Y,Z+.3125D,X+.375D,Y+.5D,Z+.6875D);
+				case 0: return AxisAlignedBB.getAABBPool().getAABB(X+.3125D,	Y+.5D,	Z+.3125D,	X+.6875D,	Y+1D,	Z+.6875D);
+				case 1: return AxisAlignedBB.getAABBPool().getAABB(X+.3125D,	Y,	Z+.3125D,	X+.6875D,	Y+.5D,	Z+.6875D);
+				case 2: return AxisAlignedBB.getAABBPool().getAABB(X+.3125D,	Y,	Z+.625D,	X+.6875D,	Y+.5D,	Z+1D);
+				case 3: return AxisAlignedBB.getAABBPool().getAABB(X+.3125D,	Y,	Z,		X+.6875D,	Y+.5D,	Z+.375D);
+				case 4: return AxisAlignedBB.getAABBPool().getAABB(X+.625D,	Y,	Z+.3125D,	X+1D,		Y+.5D,	Z+.6875D);
+				case 5: return AxisAlignedBB.getAABBPool().getAABB(X,		Y,	Z+.3125D,	X+.375D,	Y+.5D,	Z+.6875D);
 			}
+		}
+		public void setBlockBoundsForItemRender()
+		{
+			setBlockBounds(.3125F, 0F, .3125F, .6875F, .5F, .6875F);
 		}
 		public boolean isOpaqueCube()
 		{
@@ -142,32 +181,9 @@ public class Addon_Lanterns
 		{
 			return false;
 		}
-		
-	}
-	public static class BlockLanternSteel extends Block
-	{
-		Icon BaseIcon, TopIcon;
-		public BlockLanternSteel(int ID)
-		{
-			super(ID, Material.iron);
-			setUnlocalizedName("ginger_lantern_steel");
-			setStepSound(soundMetalFootstep);
-			setBlockBounds(0F, 0F, 0F, 1F, 1F, 1F);
-			setCreativeTab(CreativeTabs.tabDecorations);
-			setHardness(0.5F);
-			setLightValue(1F);
-			AddonManager.Register(this, "Wrought Iron Lantern");
-			ItemPickaxe.SetAllPicksToBeEffectiveVsBlock(this);
-			FCBlockAestheticNonOpaque_LightningRodFix.AddHoldableBlock(this);
-		}
-		public boolean isOpaqueCube()
-		{
-			return false;
-		}
 	}
 	public static class FCBlockAestheticNonOpaque_LightningRodFix extends FCBlockAestheticNonOpaque
 	{
-		public Icon LightningRodIcon;
 		static ArrayList BlocksThatCanBeHeld = new ArrayList();
 		public FCBlockAestheticNonOpaque_LightningRodFix(int ID)
 		{
@@ -184,6 +200,7 @@ public class Addon_Lanterns
 		{
 			BlocksThatCanBeHeld.add(ID);
 		}
+		
 	}
 	public static class BlockFenceSteel extends FCBlockPane
 	{
@@ -194,6 +211,18 @@ public class Addon_Lanterns
 			setResistance(10.0F);
 			setStepSound(Block.soundMetalFootstep);
 			setUnlocalizedName("fenceSteel");
+			setCreativeTab(CreativeTabs.tabDecorations);
+		}
+	}
+	public static class BlockPaperWall extends FCBlockPane
+	{
+		public BlockPaperWall(int ID)
+		{
+			super(ID, "ginger_panel_paperwall_face", "ginger_panel_paperwall_side", Material.iron, true);
+			setHardness(0.3F);
+			setResistance(1.0F);
+			setStepSound(Block.soundWoodFootstep);
+			setUnlocalizedName("paperWall");
 			setCreativeTab(CreativeTabs.tabDecorations);
 		}
 	}

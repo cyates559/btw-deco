@@ -1,6 +1,7 @@
 package net.minecraft.src;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Addon_Flowers
@@ -13,6 +14,16 @@ public class Addon_Flowers
 		Item.dyePowder = new FCItemDye_ColorPlus(95);
 		Item.m_bSuppressConflictWarnings=false;
 		
+		List recipes = CraftingManager.getInstance().getRecipeList();
+		ArrayList<RecipeFireworks> fireworks = new ArrayList<RecipeFireworks>();
+		for(Object o: recipes)
+			if(o instanceof RecipeFireworks)
+				fireworks.add((RecipeFireworks)o);
+		for(RecipeFireworks rf: fireworks)
+			recipes.remove(rf);
+		recipes.add(new RecipeFireworks_Color());
+
+
 		FCBetterThanWolves.fcPlanter = new BlockPlanter(AddonManager.ReplaceBlockID(FCBetterThanWolves.fcPlanter));
 		flower = new BlockFlowers(3002, "flower",
 			new String[]{ "yucca", "hyacinth", "birdsParadise", "azalea", "cornFlower", "lavender", "honeysuckle","allium", "orchidBlue", "poppy", "azureBluet", "daisy", "peony","lilac","rosebush"},
@@ -83,7 +94,10 @@ public class Addon_Flowers
 	}
 	public static class BlockFlowers extends BlockFlower
 	{
+
+//CLIENT ONLY
 		Icon[] Icons;
+//
 		String TextureTag;
 		public BlockFlowers(int ID, String Texture, String[] Names, String[] Titles){this(ID,Texture, Names, "",Titles,"");}
 		public BlockFlowers(int ID, String Texture, String[] Names, String[] Titles, String PostTitle){this(ID,Texture, Names, "",Titles,PostTitle);}
@@ -106,6 +120,15 @@ public class Addon_Flowers
 		{
 			return Block.plantRed.canPlaceBlockAt(par1World, par2, par3, par4);
 		}
+		public int damageDropped(int Meta)
+		{
+			return Meta;
+		}
+//CLIENT ONLY METHODS
+		public Icon getIcon(int Side, int Meta)
+		{
+			return Icons[Meta];
+		}
 		public void registerIcons(IconRegister Register)
 		{
 			for (int Index = 0; Index < Icons.length; Index++)
@@ -113,18 +136,13 @@ public class Addon_Flowers
 				Icons[Index] = Register.registerIcon("ginger_"+TextureTag+"_" + Index);
 			}
 		}
-		public int damageDropped(int Meta)
-		{
-			return Meta;
-		}
-		public Icon getIcon(int Side, int Meta)
-		{
-			return Icons[Meta];
-		}
+//
 	}
 	public static class FCItemDye_ColorPlus extends FCItemDye
 	{
+//CLIENT ONLY METHODS
 		public Icon[] ExtraIcons = new Icon[16];
+//
 		public static final String[] ColorPlus_dyeColorNames = new String[] {"black","red","green","brown","blue","purple","cyan","silver","gray","pink","lime","yellow","lightBlue","magenta","orange", "white","black2","red2","green2","brown2","blue2","purple2","cyan2","silver2","gray2","pink2","lime2","yellow2","lightBlue2","magenta2","orange2","white2"};
 		public FCItemDye_ColorPlus(int ID)
 		{
@@ -204,23 +222,9 @@ public class Addon_Flowers
 			if (Block.tallGrass.canBlockStay(CurrentWorld, X, Y + 1, Z) && CurrentWorld.isAirBlock(X, Y + 1, Z))
 			CurrentWorld.setBlockAndMetadataWithNotify(X, Y + 1, Z, Block.tallGrass.blockID, 1);
 		}
-		public void registerIcons(IconRegister var1)
-		{
-			super.registerIcons(var1);
-			int I=0;
-			while(I<16)
-			{
-				ExtraIcons[I] = var1.registerIcon("ginger_dyePowder_"+I);
-				I++;
-			}
-		}
 		public String getUnlocalizedName(ItemStack I)
 		{
 			return super.getUnlocalizedName() + "." + ColorPlus_dyeColorNames[I.getItemDamage()&31];
-		}
-		public Icon getIconFromDamage(int Meta)
-		{
-			return Meta>15 ? ExtraIcons[Meta-16] : super.getIconFromDamage(Meta);
 		}
 		public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List)
 		{
@@ -231,6 +235,22 @@ public class Addon_Flowers
 			par3List.add(new ItemStack(par1, 1, 20));
 			par3List.add(new ItemStack(par1, 1, 31));
 		}
+//CLIENT ONLY METHODS
+		public Icon getIconFromDamage(int Meta)
+		{
+			return Meta>15 ? ExtraIcons[Meta-16] : super.getIconFromDamage(Meta);
+		}
+		public void registerIcons(IconRegister var1)
+		{
+			super.registerIcons(var1);
+			int I=0;
+			while(I<16)
+			{
+				ExtraIcons[I] = var1.registerIcon("ginger_dyePowder_"+I);
+				I++;
+			}
+		}
+//
 	}
 	
 	public static class ItemFertilizer extends Item
@@ -434,6 +454,261 @@ public class Addon_Flowers
 				if (var8 != GrowthState)
 					this.SetGrassGrowthState(CurrentWorld, X, Y, Z, var8);
 			}
+		}
+	}
+	public class RecipeFireworks_Color implements IRecipe
+	{
+		private ItemStack field_92102_a;
+
+		/**
+		* Used to check if a recipe matches current crafting inventory
+		*/
+		public boolean matches(InventoryCrafting par1InventoryCrafting, World par2World)
+		{
+			this.field_92102_a = null;
+			int var3 = 0;
+			int var4 = 0;
+			int var5 = 0;
+			int var6 = 0;
+			int var7 = 0;
+			int var8 = 0;
+
+			for (int var9 = 0; var9 < par1InventoryCrafting.getSizeInventory(); ++var9)
+			{
+				ItemStack var10 = par1InventoryCrafting.getStackInSlot(var9);
+
+				if (var10 != null)
+				{
+					if (var10.itemID == Item.gunpowder.itemID)
+					{
+						++var4;
+					}
+					else if (var10.itemID == Item.fireworkCharge.itemID)
+					{
+						++var6;
+					}
+					else if (var10.itemID == Item.dyePowder.itemID)
+					{
+						++var5;
+					}
+					else if (var10.itemID == Item.paper.itemID)
+					{
+						++var3;
+					}
+					else if (var10.itemID == Item.lightStoneDust.itemID)
+					{
+						++var7;
+					}
+					else if (var10.itemID == Item.diamond.itemID)
+					{
+						++var7;
+					}
+					else if (var10.itemID == Item.fireballCharge.itemID)
+					{
+						++var8;
+					}
+					else if (var10.itemID == Item.feather.itemID)
+					{
+						++var8;
+					}
+					else if (var10.itemID == Item.goldNugget.itemID)
+					{
+						++var8;
+					}
+					else
+					{
+						if (var10.itemID != Item.skull.itemID)
+						{
+							return false;
+						}
+						++var8;
+					}
+				}
+			}
+
+			var7 += var5 + var8;
+
+			if (var4 <= 3 && var3 <= 1)
+			{
+			int var12;
+			ItemStack var13;
+			NBTTagCompound var15;
+			NBTTagCompound var16;
+
+			if (var4 >= 1 && var3 == 1 && var7 == 0)
+			{
+				this.field_92102_a = new ItemStack(Item.firework);
+
+				if (var6 > 0)
+				{
+					var15 = new NBTTagCompound();
+					var16 = new NBTTagCompound("Fireworks");
+					NBTTagList var19 = new NBTTagList("Explosions");
+
+					for (var12 = 0; var12 < par1InventoryCrafting.getSizeInventory(); ++var12)
+					{
+						var13 = par1InventoryCrafting.getStackInSlot(var12);
+
+						if (var13 != null && var13.itemID == Item.fireworkCharge.itemID && var13.hasTagCompound() && var13.getTagCompound().hasKey("Explosion"))
+						{
+							var19.appendTag(var13.getTagCompound().getCompoundTag("Explosion"));
+						}
+					}
+
+					var16.setTag("Explosions", var19);
+					var16.setByte("Flight", (byte)var4);
+					var15.setTag("Fireworks", var16);
+					this.field_92102_a.setTagCompound(var15);
+				}
+
+				return true;
+			}
+			else
+			{
+			int var21;
+
+			if (var4 == 1 && var3 == 0 && var6 == 0 && var5 > 0 && var8 <= 1)
+			{
+				this.field_92102_a = new ItemStack(Item.fireworkCharge);
+				var15 = new NBTTagCompound();
+				var16 = new NBTTagCompound("Explosion");
+				byte var17 = 0;
+				ArrayList var20 = new ArrayList();
+
+				for (var21 = 0; var21 < par1InventoryCrafting.getSizeInventory(); ++var21)
+				{
+					ItemStack var14 = par1InventoryCrafting.getStackInSlot(var21);
+
+					if (var14 != null)
+					{
+						if (var14.itemID == Item.dyePowder.itemID)
+						{
+							var20.add(Integer.valueOf(ItemDye.dyeColors[var14.getItemDamage()%16]));
+						}
+						else if (var14.itemID == Item.lightStoneDust.itemID)
+						{
+							var16.setBoolean("Flicker", true);
+						}
+						else if (var14.itemID == Item.diamond.itemID)
+						{
+							var16.setBoolean("Trail", true);
+						}
+						else if (var14.itemID == Item.fireballCharge.itemID)
+						{
+							var17 = 1;
+						}
+						else if (var14.itemID == Item.feather.itemID)
+						{
+							var17 = 4;
+						}
+						else if (var14.itemID == Item.goldNugget.itemID)
+						{
+							var17 = 2;
+						}
+						else if (var14.itemID == Item.skull.itemID)
+						{
+							var17 = 3;
+						}
+					}
+				}
+
+				int[] var24 = new int[var20.size()];
+
+				for (int var23 = 0; var23 < var24.length; ++var23)
+				{
+					var24[var23] = ((Integer)var20.get(var23)).intValue();
+				}
+
+				var16.setIntArray("Colors", var24);
+				var16.setByte("Type", var17);
+				var15.setTag("Explosion", var16);
+				this.field_92102_a.setTagCompound(var15);
+				return true;
+			}
+			else if (var4 == 0 && var3 == 0 && var6 == 1 && var5 > 0 && var5 == var7)
+			{
+				ArrayList var11 = new ArrayList();
+
+				for (var12 = 0; var12 < par1InventoryCrafting.getSizeInventory(); ++var12)
+				{
+					var13 = par1InventoryCrafting.getStackInSlot(var12);
+
+					if (var13 != null)
+					{
+						if (var13.itemID == Item.dyePowder.itemID)
+						{
+							var11.add(Integer.valueOf(ItemDye.dyeColors[var13.getItemDamage()%16]));
+						}
+						else if (var13.itemID == Item.fireworkCharge.itemID)
+						{
+							this.field_92102_a = var13.copy();
+							this.field_92102_a.stackSize = 1;
+						}
+					}
+				}
+
+				int[] var18 = new int[var11.size()];
+
+				for (var21 = 0; var21 < var18.length; ++var21)
+				{
+					var18[var21] = ((Integer)var11.get(var21)).intValue();
+				}
+
+				if (this.field_92102_a != null && this.field_92102_a.hasTagCompound())
+				{
+					NBTTagCompound var22 = this.field_92102_a.getTagCompound().getCompoundTag("Explosion");
+
+					if (var22 == null)
+					{
+						return false;
+					}
+					else
+					{
+						var22.setIntArray("FadeColors", var18);
+						return true;
+					}
+					}
+					else
+					{
+						return false;
+					}
+					}
+					else
+					{
+						return false;
+					}
+				}
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		/**
+		* Returns an Item that is the result of this recipe
+		*/
+		public ItemStack getCraftingResult(InventoryCrafting par1InventoryCrafting)
+		{
+			return this.field_92102_a.copy();
+		}
+
+		/**
+		* Returns the size of the recipe area
+		*/
+		public int getRecipeSize()
+		{
+			return 10;
+		}
+
+		public ItemStack getRecipeOutput()
+		{
+			return this.field_92102_a;
+		}
+
+		public boolean matches(IRecipe var1)
+		{
+			return false;
 		}
 	}
 }

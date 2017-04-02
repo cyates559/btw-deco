@@ -10,9 +10,47 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.io.FileInputStream;
 
 public class AddonManager extends FCAddOn
 {
+	public static final boolean DEBUG_ADDON_LOAD = true;
+
+	public static final int
+		id_paperWall=3000,
+		id_fenceSteel=3001,
+		id_lanternPaper=3027,
+		id_lanternGold=3028,
+		id_lanternSteel=3029,
+
+		id_hardenedClay=3044,
+		id_stainedClay=3045,
+
+		id_blockCopper=3005,
+
+		id_flower=3002,
+		id_tulip=3006,
+
+		id_blockDiamondium=3007,
+
+		id_glassStained=3003,
+		id_glassPaneStained=3004,
+
+		id_hayBale=3025,
+
+		id_whiteStoneBrick=3008,
+		id_whiteBrickSidingAndCorner=3009,
+		id_whiteBrickMouldingAndDecorative=3010,
+		id_whiteBrickStairs=3011,
+
+		id_oakWoodChair=3036,
+		id_spruceWoodChair=3037,
+		id_birchWoodChair=3038,
+		id_jungleWoodChair=3039,
+
+		id_clay_sub_start=3049,
+		id_flag_start=4000;
+
 	private static ArrayList<String> Names = new ArrayList<String>();
 	private static ArrayList<Object> NameTargets = new ArrayList<Object>();
 	public void Initialize()
@@ -20,24 +58,24 @@ public class AddonManager extends FCAddOn
 		CheatBlockIDs();
 	}
 	public void PostInitialize()
-	{//}public void x(){
-		
-		loadAddon("HayBale");
-		boolean flowers=loadAddon("Flowers"),
-			glass=loadAddon("Glass"),
-			clay=loadAddon("Clay");
-		if(flowers)
+	{
+		try
 		{
-			if(glass)loadAddon("GlassColor");
-			if(clay)loadAddon("ClayColor");
-		}
-		loadAddon("WhiteBrick");
-		loadAddon("Fruit");
-		loadAddon("Chairs");
-		loadAddon("Lanterns");
-		loadAddon("Diamondium");
-		loadAddon("Walls");
-		loadAddon("PurpleBlock");
+
+			File file = new File(new File("."), "addonconfig.txt");
+			FileInputStream fis = new FileInputStream(file);
+			byte[] data = new byte[(int) file.length()];
+			fis.read(data);
+			fis.close();
+			String str = new String(data, "UTF-8");
+			String[] addons = str.split(" ");
+			if(!file.exists())
+			{
+				System.out.println("[WARN] Could not find addonconfig.txt, loading of deco addons was cancelled.");
+				return;
+			}
+			for(String addon:addons) loadAddon(addon.trim());
+		}catch(Exception e){}
 	}
 	private static boolean Create_HasCall=false;
 	public void OnLanguageLoaded(StringTranslate Language)
@@ -206,7 +244,7 @@ public class AddonManager extends FCAddOn
 		//FCTileEntityBeacon BlocksList
 		Field[] BeaconFields = FCTileEntityBeacon.class.getDeclaredFields();
 		Field Beacon__m_iEffectsByBlockID = BeaconFields[4];
-		System.out.println(Beacon__m_iEffectsByBlockID.getName());
+		//System.out.println(Beacon__m_iEffectsByBlockID.getName());
 		Beacon__m_iEffectsByBlockID.setAccessible(true);
 		ArrayList[] NEW_EffectsByBlockID = new ArrayList[4096];
         for (int var0 = 0; var0 < 4096; ++var0)
@@ -223,8 +261,9 @@ public class AddonManager extends FCAddOn
 		}
 		FCTileEntityBeacon.InitializeEffectsByBlockID();
 
-
+		Item.m_bSuppressConflictWarnings=true;
 		Item.map = (ItemMap)(new FCItemMap_IDFix(102)).setUnlocalizedName("map");
+		Item.m_bSuppressConflictWarnings=false;
 	}
 	public static class FCItemMap_IDFix extends ItemMap
 	{
@@ -450,22 +489,201 @@ public class AddonManager extends FCAddOn
 				var3.add(new ItemStack(this, 1, var4));
 		}
 	}
-	public static int ToInt(boolean Victim)
+	private static Map<String, Object> GetConfigInfo(String AddonName)
 	{
-		return Victim?1:0;
-	}
-	public boolean loadAddon(String name)
-	{
-		Class c;
+		File ConfigFile = new File(new File("."),AddonName+"Config.txt");
+		Map<String,Object>Return=new HashMap<String,Object>();
 		try
 		{
-			Class.forName(this.getClass().getPackage().getName()+".Addon_"+name).newInstance();
-			return true;
+			BufferedReader Reader=new BufferedReader(new FileReader(ConfigFile));
+			String Line="";
+			while((Line=Reader.readLine())!=null)
+			{
+				String[]SplitLine=Line.split("=");
+				for (int Index=0;Index<SplitLine.length;++Index)
+				SplitLine[Index]=SplitLine[Index].trim();
+				Return.put(SplitLine[0],(SplitLine[1]=="1"||SplitLine[1]=="0")?SplitLine[1]=="1":SplitLine[1]);
+			}
+			Reader.close();
+		}
+		catch(Exception X)
+		{
+			X.printStackTrace();
+		}
+		return Return;
+	}
+	private static void WriteToConfigFile(String AddonName, Map<String, Object> Contents)
+	{
+		File ConfigFile = new File(new File("."),AddonName+"Config.txt");
+		PrintWriter Writer;
+		try
+		{
+			Writer = new PrintWriter(ConfigFile);
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
+			return;
+		}
+		for(String CurrentKey:Contents.keySet())
+		{
+			Object Value=Contents.get(CurrentKey);
+			Writer.println(CurrentKey+"="+((Value instanceof Boolean)?((Boolean)Value==true?"1":"0"):Value.toString()));
+		}
+		Writer.close();
+	}
+	public static Map<String, Object> GetConfigInfo(String AddonName, Map<String, Object> Default)
+	{
+		File ConfigFile = new File(new File("."),AddonName+"Config.txt");
+		if(!ConfigFile.exists())
+		{
+			WriteToConfigFile(AddonName, Default);
+			return Default;
+		}
+		Map<String,Object>CurrentConfigInfo=GetConfigInfo(AddonName),NewConfigInfo=Default;
+		boolean NeedsRewrite = false;
+		for(String CurrentKey:Default.keySet())
+		{
+			if(CurrentConfigInfo.containsKey(CurrentKey))
+			NewConfigInfo.put(CurrentKey, CurrentConfigInfo.get(CurrentKey));
+			else
+			NeedsRewrite=true;
+		}
+		if(NeedsRewrite)
+		WriteToConfigFile(AddonName, CurrentConfigInfo);
+		return NewConfigInfo;
+	}
+	public static int ToInt(boolean Victim)
+	{
+		return Victim?1:0;
+	}
+	public static boolean require(String name)
+	{
+		try
+		{
+			Class.forName("Addon_"+name);
+			return true;
+		}
+		catch (ClassNotFoundException ex1)
+		{
+			try
+			{
+				Class.forName(AddonManager.class.getPackage().getName()+".Addon_"+name);
+				return true;
+			}
+			catch (ClassNotFoundException ex2)
+			{
+				System.out.println("[WARN] Addon not found: " + name);
+			}
+			catch (Exception ex3)
+			{
+				System.out.println("[WARN] Addon not found: " + name);
+				if(DEBUG_ADDON_LOAD) ex3.printStackTrace();
+			}
 			return false;
+		}
+		catch (Exception ex4)
+		{
+			System.out.println("[WARN] Addon not found: " + name);
+			if(DEBUG_ADDON_LOAD) ex4.printStackTrace();
+			return false;
+		}
+	}
+	public static boolean loadAddon(String name)
+	{
+		try
+		{
+			Class.forName("Addon_"+name).newInstance();
+			System.out.println("[INFO] Loaded addon: " + name);
+			return true;
+		}
+		catch (ClassNotFoundException ex1)
+		{
+			try
+			{
+				Class.forName(AddonManager.class.getPackage().getName()+".Addon_"+name).newInstance();
+				System.out.println("[INFO] Loaded addon: " + name);
+				return true;
+			}
+			catch (ClassNotFoundException ex2)
+			{
+				System.out.println("[INFO] Addon not found: " + name);
+			}
+			catch (Exception ex3)
+			{
+				System.out.println("[WARN] Problem loading addon: " + name);
+				if(DEBUG_ADDON_LOAD) ex3.printStackTrace();
+			}
+			return false;
+		}
+		catch (Exception ex4)
+		{
+			System.out.println("[WARN] Problem loading addon: " + name);
+			if(DEBUG_ADDON_LOAD) ex4.printStackTrace();
+			return false;
+		}
+	}
+	public static class FCBlockSidingAndCornerAndDecorative_Wall extends FCBlockSidingAndCornerAndDecorative
+	{
+
+		public FCBlockSidingAndCornerAndDecorative_Wall(int var1, Material var2, String var3, float var4, float var5, StepSound var6, String var7, String OriginalName)
+		{
+			super(var1, var2, var3, var4, var5, var6, var7);
+			setCreativeTab(CreativeTabs.tabDecorations);
+			AddonManager.Name(getUnlocalizedName() + ".fence" + ".name", OriginalName + " Wall");
+		}
+		public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+		{
+			if(par1IBlockAccess.getBlockMetadata(par2,par3,par4) != 14)
+			{
+				super.setBlockBoundsBasedOnState(par1IBlockAccess, par2, par3, par4);
+				return;
+			}
+
+			boolean var5 = this.DoesFenceConnectTo(par1IBlockAccess, par2, par3, par4 - 1);
+			boolean var6 = this.DoesFenceConnectTo(par1IBlockAccess, par2, par3, par4 + 1);
+			boolean var7 = this.DoesFenceConnectTo(par1IBlockAccess, par2 - 1, par3, par4);
+			boolean var8 = this.DoesFenceConnectTo(par1IBlockAccess, par2 + 1, par3, par4);
+			float var9 = 0.25F;
+			float var10 = 0.75F;
+			float var11 = 0.25F;
+			float var12 = 0.75F;
+			float var13 = 1.0F;
+
+			if (var5)
+			{
+				var11 = 0.0F;
+			}
+
+			if (var6)
+			{
+				var12 = 1.0F;
+			}
+
+			if (var7)
+			{
+				var9 = 0.0F;
+			}
+
+			if (var8)
+			{
+				var10 = 1.0F;
+			}
+
+			if (var5 && var6 && !var7 && !var8)
+			{
+				var13 = 0.8125F;
+				var9 = 0.3125F;
+				var10 = 0.6875F;
+			}
+			else if (!var5 && !var6 && var7 && var8)
+			{
+				var13 = 0.8125F;
+				var11 = 0.3125F;
+				var12 = 0.6875F;
+			}
+
+			this.setBlockBounds(var9, 0.0F, var11, var10, var13, var12);
 		}
 	}
 }

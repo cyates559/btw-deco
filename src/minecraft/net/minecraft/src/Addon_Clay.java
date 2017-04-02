@@ -2,6 +2,8 @@ package net.minecraft.src;
 public class Addon_Clay
 {
 	public static Block hardenedClay, stainedClay;
+	public static final String[] 	tags=new String[] { "black", "red", "green", "brown", "blue", "purple", "cyan", "lightGrey", "grey", "pink", "lime", "yellow", "lightBlue", "magenta", "orange", "white" },
+					names=new String[] { "Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "Light Grey", "Grey", "Pink", "Lime", "Yellow", "Light Blue", "Magenta", "Orange", "White" };
 	public Addon_Clay()
 	{
 		hardenedClay = (new Block(3044, Material.rock)).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("ginger_clay").setCreativeTab(CreativeTabs.tabBlock);
@@ -25,11 +27,14 @@ public class Addon_Clay
 			super(ID, MyMaterial);
 			NameTag = Tag;
 			setUnlocalizedName(Tag);
-			AddonManager.Register(this,
-				new String[] { "black", "red", "green", "brown", "blue", "purple", "cyan", "lightGrey", "grey", "pink", "lime", "yellow", "lightBlue", "magenta", "orange", "white" },
-				new String[] { "Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "Light Grey", "Grey", "Pink", "Lime", "Yellow", "Light Blue", "Magenta", "Orange", "White" },
-				" " + Name);
+			AddonManager.Register(this,tags,names," " + Name);
 		}
+		public int damageDropped(int Meta)
+		{
+			return Meta;
+		}
+
+		//CLIENT ONLY
 		public Icon getIcon(int Side, int Meta)
 		{
 			return Icons[Meta];
@@ -38,10 +43,6 @@ public class Addon_Clay
 		{
 			for (int Index = 0; Index < 16; Index++)
 				Icons[Index] = Register.registerIcon(NameTag+"_" + Index);
-		}
-		public int damageDropped(int Meta)
-		{
-			return Meta;
 		}
 	}
 }

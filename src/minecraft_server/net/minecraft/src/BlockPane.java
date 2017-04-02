@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class BlockPane extends Block
 {
-	static AddonManager manInstance=new AddonManager();
+	public static AddonManager addonInstance=new AddonManager();
     /**
      * Holds the texture index of the side of the pane (the thin lateral side)
      */
@@ -47,6 +47,10 @@ public class BlockPane extends Block
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    public boolean renderAsNormalBlock()
+    {
+        return false;
+    }
 
     /**
      * The type of render function that is called for this block

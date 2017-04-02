@@ -22,6 +22,15 @@ public class Addon_Chairs
 			setStepSound(soundWoodFootstep);
 		}
 	}
+	public static class BlockChairStone extends BlockChair
+	{
+		public BlockChairStone(int ID, String tag, String name)
+		{
+			super(ID, Material.rock, tag, name);
+			ItemPickaxe.SetAllPicksToBeEffectiveVsBlock(this);
+			setStepSound(soundStoneFootstep);
+		}
+	}
 	public static class BlockChair extends Block implements FCIBlock
 	{
 		public BlockChair(int ID, Material MyMaterial, String Tag, String Name)
@@ -110,6 +119,8 @@ public class Addon_Chairs
 		{
 			return true;
 		}
+
+		//CLIENT ONLY
 		public void SetRenderBoundsRotatedAboutJToFacing(RenderBlocks var1, float var2, float var3, float var4, float var5, float var6, float var7, int var8)
 		{
 			float var9;
@@ -143,6 +154,8 @@ public class Addon_Chairs
 			}
 			var1.setRenderBounds((double) var9, (double) var3, (double) var10, (double) var11, (double) var6, (double) var12);
 		}
+
+
 		public boolean RenderBlock(RenderBlocks Render, int X, int Y, int Z)
 		{
 			int Facing = GetFacing(Render.blockAccess, X, Y, Z);

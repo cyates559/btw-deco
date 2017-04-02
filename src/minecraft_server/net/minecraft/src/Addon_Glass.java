@@ -38,7 +38,6 @@ public class Addon_Glass
 	}
 	public static class BlockStainedGlass extends FCBlockGlass
 	{
-		public static Icon[] PaneSideIcons = new Icon[16], Icons = new Icon[16];
 		public BlockStainedGlass(int ID)
 		{
 			super(ID,Material.glass,false);

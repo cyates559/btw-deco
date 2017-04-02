@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class BlockPane extends Block
 {
-	public static FCAddOn addonInstance=new AddonManager();
+	public static AddonManager addonInstance=new AddonManager();
     /**
      * Holds the texture index of the side of the pane (the thin lateral side)
      */
@@ -192,7 +192,7 @@ public class BlockPane extends Block
      * Gets passed in the blockID of the block adjacent and supposed to return true if its allowed to connect to the
      * type of blockID passed in. Args: blockID
      */
-    public boolean canThisPaneConnectToThisBlockID(int par1)
+    public final boolean canThisPaneConnectToThisBlockID(int par1)
     {
         return Block.opaqueCubeLookup[par1] || par1 == this.blockID || par1 == Block.glass.blockID;
     }

@@ -38,7 +38,6 @@ public class Addon_Glass
 	}
 	public static class BlockStainedGlass extends FCBlockGlass
 	{
-		public static Icon[] PaneSideIcons = new Icon[16], Icons = new Icon[16];
 		public BlockStainedGlass(int ID)
 		{
 			super(ID,Material.glass,false);
@@ -55,6 +54,8 @@ public class Addon_Glass
 		{
 			return 1;
 		}
+//CLIENT ONLY METHODS
+		public static Icon[] PaneSideIcons = new Icon[16], Icons = new Icon[16];
 		public Icon getIcon(int Side, int Meta)
 		{
 			return Icons[Meta];
@@ -67,5 +68,6 @@ public class Addon_Glass
 				PaneSideIcons[Index] = Register.registerIcon("ginger_glass_pane_top_" + Index);
 			}
 		}
+//
 	}
 }

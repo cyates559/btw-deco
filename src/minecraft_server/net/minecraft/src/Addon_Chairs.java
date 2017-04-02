@@ -22,6 +22,15 @@ public class Addon_Chairs
 			setStepSound(soundWoodFootstep);
 		}
 	}
+	public static class BlockChairStone extends BlockChair
+	{
+		public BlockChairStone(int ID, String tag, String name)
+		{
+			super(ID, Material.rock, tag, name);
+			ItemPickaxe.SetAllPicksToBeEffectiveVsBlock(this);
+			setStepSound(soundStoneFootstep);
+		}
+	}
 	public static class BlockChair extends Block implements FCIBlock
 	{
 		public BlockChair(int ID, Material MyMaterial, String Tag, String Name)
@@ -76,6 +85,10 @@ public class Addon_Chairs
 		{
 			return false;
 		}
+		public boolean renderAsNormalBlock()
+		{
+			return false;
+		}
 		public int onBlockPlaced(World var1, int var2, int var3, int var4, int var5, float var6, float var7, float var8, int var9)
 		{
 			if (var5 < 2)
@@ -101,6 +114,10 @@ public class Addon_Chairs
 		public void setBlockBoundsBasedOnState(IBlockAccess var1, int var2, int var3, int var4)
 		{
 			setBlockBounds(.0625F, 0.0F, .0625F, .9375F, 1.25F, .9375F);
+		}
+		public boolean shouldSideBeRendered(IBlockAccess var1, int var2, int var3, int var4, int var5)
+		{
+			return true;
 		}
 	}
 }
