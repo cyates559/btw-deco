@@ -5,7 +5,7 @@ public class Addon_ClaySubBlocks
 	Block[] stainedClaySidingAndCorner, stainedClayMouldingAndDecorative,stainedClayStairs;
 	public Addon_ClaySubBlocks()
 	{
-		if(AddonManager.require("Clay")) return;
+		if(AddonManager.isAddonLoaded("Clay")) return;
 		int start=AddonManager.id_clay_sub_start,end=start+51,id=start,i=0;
 		final String main="Hardened Clay";
 		claySidingAndCorner=new AddonManager.FCBlockSidingAndCornerAndDecorative_Wall(id++, Material.rock, "ginger_clay", 2.0F, 5.0F, Block.soundWoodFootstep, "claySiding", "Hardened Clay");

@@ -53,6 +53,8 @@ public class AddonManager extends FCAddOn
 
 	private static ArrayList<String> Names = new ArrayList<String>();
 	private static ArrayList<Object> NameTargets = new ArrayList<Object>();
+	private static ArrayList<String> loadedAddons = new ArrayList<String>();
+
 	public void Initialize()
 	{
 		CheatBlockIDs();
@@ -558,35 +560,12 @@ public class AddonManager extends FCAddOn
 	}
 	public static boolean require(String name)
 	{
-		try
-		{
-			Class.forName("Addon_"+name);
-			return true;
-		}
-		catch (ClassNotFoundException ex1)
-		{
-			try
-			{
-				Class.forName(AddonManager.class.getPackage().getName()+".Addon_"+name);
-				return true;
-			}
-			catch (ClassNotFoundException ex2)
-			{
-				System.out.println("[WARN] Addon not found: " + name);
-			}
-			catch (Exception ex3)
-			{
-				System.out.println("[WARN] Addon not found: " + name);
-				if(DEBUG_ADDON_LOAD) ex3.printStackTrace();
-			}
-			return false;
-		}
-		catch (Exception ex4)
-		{
-			System.out.println("[WARN] Addon not found: " + name);
-			if(DEBUG_ADDON_LOAD) ex4.printStackTrace();
-			return false;
-		}
+		//The original way I wrote this method was stupid and did not make sense.
+		return isAddonLoaded(name);
+	}
+	public static boolean isAddonLoaded(String name)
+	{
+		return loadedAddons.contains(name);
 	}
 	public static boolean loadAddon(String name)
 	{
@@ -594,6 +573,7 @@ public class AddonManager extends FCAddOn
 		{
 			Class.forName("Addon_"+name).newInstance();
 			System.out.println("[INFO] Loaded addon: " + name);
+			loadedAddons.add(name);
 			return true;
 		}
 		catch (ClassNotFoundException ex1)
@@ -602,6 +582,7 @@ public class AddonManager extends FCAddOn
 			{
 				Class.forName(AddonManager.class.getPackage().getName()+".Addon_"+name).newInstance();
 				System.out.println("[INFO] Loaded addon: " + name);
+				loadedAddons.add(name);
 				return true;
 			}
 			catch (ClassNotFoundException ex2)
