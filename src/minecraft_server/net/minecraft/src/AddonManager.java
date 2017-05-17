@@ -54,15 +54,17 @@ public class AddonManager extends FCAddOn
 	private static ArrayList<String> Names = new ArrayList<String>();
 	private static ArrayList<Object> NameTargets = new ArrayList<Object>();
 	private static ArrayList<String> loadedAddons = new ArrayList<String>();
+	
 	public void Initialize()
 	{
+		System.out.println("[INFO] AddonManager: Initialize");
 		CheatBlockIDs();
 	}
 	public void PostInitialize()
 	{
+		System.out.println("[INFO] AddonManager: PostInitialize");
 		try
 		{
-
 			File file = new File(new File("."), "addonconfig.txt");
 			FileInputStream fis = new FileInputStream(file);
 			byte[] data = new byte[(int) file.length()];

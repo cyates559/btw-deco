@@ -57,10 +57,12 @@ public class AddonManager extends FCAddOn
 
 	public void Initialize()
 	{
+		System.out.println("[INFO] AddonManager: Initialize");
 		CheatBlockIDs();
 	}
 	public void PostInitialize()
 	{
+		System.out.println("[INFO] AddonManager: PostInitialize");
 		try
 		{
 			File file = new File(net.minecraft.client.Minecraft.getMinecraftDir(), "addonconfig.txt");

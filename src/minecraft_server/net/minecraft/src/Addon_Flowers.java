@@ -8,6 +8,11 @@ public class Addon_Flowers
 {
 	public static Block flower, tulip;
 	public static Item fertilizer;
+	public static String[]
+		flowers = { "yucca", "hyacinth", "birdsParadise", "azalea", "cornFlower", "lavender", "honeysuckle","allium", "orchidBlue", "poppy", "azureBluet", "daisy", "peony","lilac","rosebush", "roseBlue"},
+		tulips = { "red","pink", "orange", "white", "blue"},
+		flowerNames = { "Yucca", "Hyacinth", "Birds of Paradise", "Azaleas", "Cornflower", "Lavender", "Honeysuckle", "Allium","Blue Orchid", "Poppy", "Azure Bluet", "Daisy", "Peony", "Lilac", "Rose Bush", "Blue Rose"},
+		tulipNames = { "Red", "Pink", "Orange", "White", "Blue"};
 	public Addon_Flowers()
 	{
 		Item.m_bSuppressConflictWarnings=true;
@@ -25,12 +30,8 @@ public class Addon_Flowers
 
 
 		FCBetterThanWolves.fcPlanter = new BlockPlanter(AddonManager.ReplaceBlockID(FCBetterThanWolves.fcPlanter));
-		flower = new BlockFlowers(3002, "flower",
-			new String[]{ "yucca", "hyacinth", "birdsParadise", "azalea", "cornFlower", "lavender", "honeysuckle","allium", "orchidBlue", "poppy", "azureBluet", "daisy", "peony","lilac","rosebush"},
-			new String[]{ "Yucca", "Hyacinth", "Birds of Paradise", "Azaleas", "Cornflower", "Lavender", "Honeysuckle", "Allium","Blue Orchid", "Poppy", "Azure Bluet", "Daisy", "Peony", "Lilac", "Rose Bush"});
-		tulip = new BlockFlowers(3006, "tulip",
-			new String[] { "red", "pink", "orange", "white"},
-			new String[] { "Red", "Pink", "Orange", "White"}, " Tulip");
+		flower = new BlockFlowers(3002, "flower",flowers,flowerNames);
+		tulip = new BlockFlowers(3006, "tulip", tulips, tulipNames, " Tulip");
 		
 		fertilizer = new ItemFertilizer(30003);
 		
@@ -45,27 +46,46 @@ public class Addon_Flowers
 		//Fertilizer
 		FCRecipes.AddShapelessVanillaRecipe(new ItemStack(fertilizer, 2), new ItemStack[] { new ItemStack(Item.dyePowder, 1, 15), new ItemStack(FCBetterThanWolves.fcDung) });
 
-		//New millstone recipes, flowers
+		//Flower Recipes
+
+		// Yucca
 		FCRecipes.AddMillStoneRecipe(new ItemStack[]{new ItemStack(Item.dyePowder, 2, 10)},	new ItemStack[]{new ItemStack(flower, 1, 0)});
+		// Hyacinth
 		FCRecipes.AddMillStoneRecipe(new ItemStack[]{new ItemStack(Item.dyePowder, 2, 12)},	new ItemStack[]{new ItemStack(flower, 1, 1)});
+		// Birds of Paridise
 		FCRecipes.AddMillStoneRecipe(new ItemStack[]{new ItemStack(Item.dyePowder, 2, 14)},	new ItemStack[]{new ItemStack(flower, 1, 2)});
+		// Azalea
 		FCRecipes.AddMillStoneRecipe(new ItemStack[]{new ItemStack(Item.dyePowder, 2, 9) },	new ItemStack[]{new ItemStack(flower, 1, 3)});
-		FCRecipes.AddMillStoneRecipe(new ItemStack[]{new ItemStack(Item.dyePowder, 2, 20)},	new ItemStack[]{new ItemStack(flower, 1, 4)});//newdye
-		FCRecipes.AddMillStoneRecipe(new ItemStack[]{new ItemStack(Item.dyePowder, 2, 5) },	new ItemStack[]{new ItemStack(flower, 1, 5)});//newdye maybe
-		FCRecipes.AddMillStoneRecipe(new ItemStack[]{new ItemStack(Item.dyePowder, 1, 31),new ItemStack(Item.dyePowder, 1, 11)},new ItemStack[]{new ItemStack(flower, 1, 6)});//newdye maybe
+		// Cornflower
+		FCRecipes.AddMillStoneRecipe(new ItemStack[]{new ItemStack(Item.dyePowder, 2, 20)},	new ItemStack[]{new ItemStack(flower, 1, 4)});
+		// Lavender
+		FCRecipes.AddMillStoneRecipe(new ItemStack[]{new ItemStack(Item.dyePowder, 2, 5) },	new ItemStack[]{new ItemStack(flower, 1, 5)});
+		// Honeysuckle
+		FCRecipes.AddMillStoneRecipe(new ItemStack[]{new ItemStack(Item.dyePowder, 1, 31),new ItemStack(Item.dyePowder, 1, 11)},new ItemStack[]{new ItemStack(flower, 1, 6)});
+		// Allium
 		FCRecipes.AddMillStoneRecipe(new ItemStack[]{new ItemStack(Item.dyePowder, 2, 13)},	new ItemStack[]{new ItemStack(flower, 1, 7)});
+		// Blue Orchid
 		FCRecipes.AddMillStoneRecipe(new ItemStack[]{new ItemStack(Item.dyePowder, 2, 12)},	new ItemStack[]{new ItemStack(flower, 1, 8)});
+		// Poppy
 		FCRecipes.AddMillStoneRecipe(new ItemStack[]{new ItemStack(Item.dyePowder, 2, 1) },	new ItemStack[]{new ItemStack(flower, 1, 9)});
+		// Azure Bluet
 		FCRecipes.AddMillStoneRecipe(new ItemStack[]{new ItemStack(Item.dyePowder, 1, 31),new ItemStack(Item.dyePowder, 1, 11)},new ItemStack[]{new ItemStack(flower, 1, 10)});
+		// Daisy
 		FCRecipes.AddMillStoneRecipe(new ItemStack[]{new ItemStack(Item.dyePowder, 1, 31),new ItemStack(Item.dyePowder, 1, 11)},new ItemStack[]{new ItemStack(flower, 1, 11)});
+		// Peony
 		FCRecipes.AddMillStoneRecipe(new ItemStack[]{new ItemStack(Item.dyePowder, 2, 13)},	new ItemStack[]{new ItemStack(flower, 1, 12)});
+		// Lilac
 		FCRecipes.AddMillStoneRecipe(new ItemStack[]{new ItemStack(Item.dyePowder, 2, 13)},	new ItemStack[]{new ItemStack(flower, 1, 13)});
+		// Rose Bush
 		FCRecipes.AddMillStoneRecipe(new ItemStack[]{new ItemStack(Item.dyePowder, 3, 1)},	new ItemStack[]{new ItemStack(flower, 1, 14)});
-		//tulips
+		// Blue Rose
+		FCRecipes.AddMillStoneRecipe(new ItemStack[]{new ItemStack(Item.dyePowder, 2, 20)},	new ItemStack[]{new ItemStack(flower, 1, 15)});
+		// Tulips
 		FCRecipes.AddMillStoneRecipe(new ItemStack[]{new ItemStack(Item.dyePowder, 1, 14),new ItemStack(Item.dyePowder, 1, 1)},	new ItemStack[]{new ItemStack(tulip, 1, 0)});
 		FCRecipes.AddMillStoneRecipe(new ItemStack[]{new ItemStack(Item.dyePowder, 2, 9)},	new ItemStack[]{new ItemStack(tulip, 1, 1)});
 		FCRecipes.AddMillStoneRecipe(new ItemStack[]{new ItemStack(Item.dyePowder, 2, 14)},	new ItemStack[]{new ItemStack(tulip, 1, 2)});
 		FCRecipes.AddMillStoneRecipe(new ItemStack[]{new ItemStack(Item.dyePowder, 2, 31)},	new ItemStack[]{new ItemStack(tulip, 1, 3)});
+		FCRecipes.AddMillStoneRecipe(new ItemStack[]{new ItemStack(Item.dyePowder, 2, 20)},	new ItemStack[]{new ItemStack(tulip, 1, 4)});
 		
 		//Cooking with dyes
 		for (int Index = 0; Index < 16; Index++)
@@ -372,7 +392,7 @@ public class Addon_Flowers
 					if (var8 > 3)
 					{
 						var8 = 0;
-						int R = itemRand.nextInt(27);
+						int R = itemRand.nextInt(28);
 						switch (R)
 						{
 							case 0:
@@ -389,8 +409,21 @@ public class Addon_Flowers
 							case 11:
 							case 12:
 							case 13:
-							case 14:
 								CurrentWorld.setBlockAndMetadataWithNotify(X, Y+1, Z, flower.blockID, R);
+								break;
+							case 14:
+								R = itemRand.nextInt(5);
+								switch(R)
+								{//RARE FLOWERS
+									case 0:
+										CurrentWorld.setBlockAndMetadataWithNotify(X, Y+1, Z, flower.blockID, 15);
+									case 1:
+										CurrentWorld.setBlockAndMetadataWithNotify(X, Y+1, Z, tulip.blockID, 4);
+									case 2:
+										CurrentWorld.setBlockAndMetadataWithNotify(X, Y + 1, Z, Block.tallGrass.blockID, 0);
+									case 3:
+										CurrentWorld.setBlockAndMetadataWithNotify(X, Y + 1, Z, Block.tallGrass.blockID, 2);
+								}
 								break;
 							case 15:
 								CurrentWorld.setBlockWithNotify(X, Y+1, Z, Block.plantYellow.blockID);
