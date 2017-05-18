@@ -416,13 +416,17 @@ public class Addon_Flowers
 								switch(R)
 								{//RARE FLOWERS
 									case 0:
-										CurrentWorld.setBlockAndMetadataWithNotify(X, Y+1, Z, flower.blockID, 15);
+										CurrentWorld.setBlockAndMetadataWithNotify(X, Y + 1, Z, flower.blockID, 15);
+										break;
 									case 1:
-										CurrentWorld.setBlockAndMetadataWithNotify(X, Y+1, Z, tulip.blockID, 4);
+										CurrentWorld.setBlockAndMetadataWithNotify(X, Y + 1, Z, tulip.blockID, 4);
+										break;
 									case 2:
 										CurrentWorld.setBlockAndMetadataWithNotify(X, Y + 1, Z, Block.tallGrass.blockID, 0);
+										break;
 									case 3:
 										CurrentWorld.setBlockAndMetadataWithNotify(X, Y + 1, Z, Block.tallGrass.blockID, 2);
+										break;
 								}
 								break;
 							case 15:
