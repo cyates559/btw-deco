@@ -12,7 +12,7 @@
 2. Download the ZIP file of this repository (or clone it)
 3. Extract the ZIP file and go to the minecraft directory inside of it
 4. Copy the contents of this directory into your minecraft jar file
-5. Copy the addonconfig.txt file to your minecraft directory (unless you've changed it, this should be '~/.minecraft' or 'C:\Users\YourUserName\Application Data\.minecraft')
+5. Copy the addonconfig.txt file to your minecraft directory (unless you've changed it, this should be '~/.minecraft' or '%appdata%\\.minecraft')
 
 ## Using the addonconfig.txt File
 * The addonconfig.txt file tells the Mod which Add-ons to load and must be placed in the Working directory of your game or server
