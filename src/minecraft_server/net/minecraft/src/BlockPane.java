@@ -5,7 +5,8 @@ import java.util.Random;
 
 public class BlockPane extends Block
 {
-	public static AddonManager addonInstance=new AddonManager();
+	{new AddonManager();}
+    
     /**
      * Holds the texture index of the side of the pane (the thin lateral side)
      */
