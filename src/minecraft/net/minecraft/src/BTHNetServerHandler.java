@@ -25,7 +25,7 @@ public class BTHNetServerHandler extends NetServerHandler {
 		}
 
 		try {
-			Class.forName("net.minecraft.src.AddonManager").getMethod("serverCustomPacketReceived", MinecraftServer.class, EntityPlayerMP.class,
+			Class.forName("AddonManager").getMethod("serverCustomPacketReceived", MinecraftServer.class, EntityPlayerMP.class,
 					Packet250CustomPayload.class).invoke(null, this.mcServer, this.playerEntity, aPacket);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
