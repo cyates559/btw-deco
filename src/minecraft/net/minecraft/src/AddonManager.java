@@ -1,16 +1,18 @@
 package net.minecraft.src;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.io.FileInputStream;
+
+import net.minecraft.server.MinecraftServer;
 
 public class AddonManager extends FCAddOn
 {
@@ -577,6 +579,22 @@ public class AddonManager extends FCAddOn
 			me.setBlockBoundsBasedOnState(Render.blockAccess, X, Y, Z);
 			return true;
 		}
-//
+	}
+	
+	public static void serverCustomPacketReceived(MinecraftServer ms, EntityPlayerMP epmp,
+			Packet250CustomPayload packet) {
+		try {
+			DataInputStream dis = new DataInputStream(new ByteArrayInputStream(packet.data));
+
+			if (packet.channel.equals("DECO|OLDGLASS")) {
+				int size = dis.readInt();
+				int damage = dis.readInt();
+								
+				ItemStack stack = new ItemStack(30008+256,size,damage);
+				epmp.inventory.setInventorySlotContents(epmp.inventory.currentItem, stack);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

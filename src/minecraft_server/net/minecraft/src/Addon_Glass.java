@@ -26,21 +26,13 @@ public class Addon_Glass
 		FCRecipes.RemoveVanillaRecipe(new ItemStack(Item.glassBottle, 3), new Object[] {"# #", " # ", '#', Block.glass});
 		FCRecipes.AddVanillaRecipe(new ItemStack(Item.glassBottle, 3), new Object[] {" # ", "# #", "###", '#', glassChunk});
 		FCRecipes.AddStokedCrucibleRecipe(new ItemStack(glassChunk, 2), new ItemStack[] {new ItemStack(Item.glassBottle, 1)});
-		
-		for (int Index = 0; Index < 16; Index++)
-		{
-			FCRecipes.AddStokedCauldronRecipe(new ItemStack(glassStained, 1, Index), new ItemStack[] { new ItemStack(Block.glass), new ItemStack(Item.dyePowder, 1, Index) });
-			FCRecipes.AddStokedCauldronRecipe(new ItemStack(Block.glass), new ItemStack[]{new ItemStack(FCBetterThanWolves.fcSoap), new ItemStack(glassStained, 2, Index) });
-
-			//FCRecipes.AddVanillaRecipe(new ItemStack(stainedGlassPane, 16, Index), new Object[] { "GGG", "GGG", 'G', new ItemStack(stainedGlass, 1, Index) });
-			//FCRecipes.AddStokedCrucibleRecipe(new ItemStack(stainedGlass, 3, Index), new ItemStack[] { new ItemStack(stainedGlassPane, 8, Index) });
-		}
 	}
 	public static class BlockStainedGlass extends FCBlockGlass
 	{
 		public BlockStainedGlass(int ID)
 		{
 			super(ID,Material.glass,false);
+			setCreativeTab((CreativeTabs)null);
 			setHardness(0.3F);
 			setStepSound(soundGlassFootstep);
 			setUnlocalizedName("ginger_glass_");
