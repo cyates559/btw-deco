@@ -26,7 +26,7 @@ public class Addon_Stained_Glass_Item extends Item {
 	}
 	
 	public String getItemDisplayName(ItemStack par1ItemStack) {
-		int damage = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 5);
+		int damage = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 15);
 		return stainedGlassNames[damage]+" Stained Glass";
 	}
 
