@@ -1,0 +1,8 @@
+// This class should contain a list of custom NetServerHandler classes for every BTW addon
+// that sends custom network packages. This will ensure compatibility for future releases
+// without needing to keep changing every addon's source code when other addons update.
+// If a new BTW addon is released that also handles custom network packages this list
+// should be updated with it's custom network handler class name, following the same pattern bellow.
+
+class_name=JBNetServerHandler
+class_name=AddonNetServerHandler

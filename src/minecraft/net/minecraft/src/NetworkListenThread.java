@@ -28,7 +28,7 @@ public abstract class NetworkListenThread
     {
       //DNCode Start
       //this.connections.add(par1NetServerHandler);
-      this.connections.add(new BTHNetServerHandler(this.getServer(), par1NetServerHandler.netManager, par1NetServerHandler.playerEntity));
+      this.connections.add(new GenericBTWAddonNetServerHandler(this.getServer(), par1NetServerHandler.netManager, par1NetServerHandler.playerEntity));
       //DNCode End
     }
 
