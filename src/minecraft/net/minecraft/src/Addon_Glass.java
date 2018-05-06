@@ -45,6 +45,13 @@ public class Addon_Glass
 		@Override
 		public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving,
 				ItemStack par6ItemStack) {
+			
+			if (par5EntityLiving instanceof EntityPlayer) {
+				EntityPlayer ep = (EntityPlayer)par5EntityLiving;
+				if (ep.inventory.getCurrentItem().itemID != 3003)
+					return;				
+			}
+			
 			sendClientOldGlassBlockMessage(par6ItemStack.stackSize-1, par6ItemStack.getItemDamage());
 			
 			super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLiving, par6ItemStack);

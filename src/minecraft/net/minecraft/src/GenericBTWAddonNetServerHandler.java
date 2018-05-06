@@ -21,16 +21,16 @@ public class GenericBTWAddonNetServerHandler extends NetServerHandler {
 		String prefix = getClassPackagePrefix();
 		ArrayList<String> classNames = getCustomNetworkListenersClassNames();
 
-		try {
-			for (String className : classNames) {
+		for (String className : classNames) {
+			try {
 				Constructor<?> c = Class.forName(prefix + className).getConstructor(MinecraftServer.class, INetworkManager.class,
 						EntityPlayerMP.class);
-
+	
 				CustomBTWAddonNetServerHandler nsh = (CustomBTWAddonNetServerHandler) c.newInstance(aServer, aNetManager,	aPlayer);
-
+	
 				customHandlers.add(nsh);
-			}
-		} catch (Throwable e) {}
+			} catch (Throwable e) {}
+		}
 	}
 
 	public void handleCustomPayload(Packet250CustomPayload aPacket) {
