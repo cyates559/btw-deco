@@ -10,8 +10,9 @@
 ## Installing the Client
 1. Install Better Than Wolves.
 2. Download the ZIP file of this repository (or clone it)
-3. Extract the ZIP file and go to the minecraft directory inside of it
-4. Copy the contents of this directory into your minecraft jar file
+3. Extract the contents of the "minecraft" directory inside the zip file into your minecraft jar file.
+ * I highly recommend using MCPatcher to take care of this step for you.
+ * If you have a server you may do the same for the "minecraft_server" directory and your "minecraft_server" jar file.
 5. Copy the addonconfig.txt file to your minecraft directory (unless you've changed it, this should be '~/.minecraft' or '%appdata%\\.minecraft')
 
 ## Using the addonconfig.txt File
