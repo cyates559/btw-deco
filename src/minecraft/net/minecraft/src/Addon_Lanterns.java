@@ -15,10 +15,10 @@ public class Addon_Lanterns
 		fenceSteel = new BlockFenceSteel(3001);
 
 		lanternPaper = new BlockLantern(3027,Material.wood,.3F,"paper","Firefly Lantern",true).setStepSound(Block.soundWoodFootstep);
-		ItemAxe.SetAllAxesToBeEffectiveVsBlock(lanternPaper);
+		lanternPaper.SetAxesEffectiveOn(true);
 		lanternGold = new BlockLanternGold(3028);
 		lanternSteel = new BlockLantern(3029,Material.iron,.5F,"steel","Wrought Iron Lantern").setStepSound(Block.soundStoneFootstep);
-		ItemPickaxe.SetAllPicksToBeEffectiveVsBlock(lanternPaper);
+		lanternSteel.SetPicksEffectiveOn(true);
 
 		bottleHempOil = new Item(30007).setUnlocalizedName("ginger_bottle_hempoil").setCreativeTab(CreativeTabs.tabMaterials);
 
@@ -94,7 +94,7 @@ public class Addon_Lanterns
 			setHardness(0.3F);
 			setLightValue(1F);
 			AddonManager.Register(this, "Chandelier");
-			ItemPickaxe.SetAllPicksToBeEffectiveVsBlock(this);
+			this.SetPicksEffectiveOn(true);
 		}
 		public boolean isOpaqueCube()
 		{
@@ -260,8 +260,8 @@ public class Addon_Lanterns
 		{
 			super(ID);
 			setCreativeTab(CreativeTabs.tabDecorations);
-			ItemPickaxe.SetAllPicksToBeEffectiveVsBlock(this);
-			ItemAxe.SetAllAxesToBeEffectiveVsBlock(this);
+			this.SetAxesEffectiveOn(true);
+			this.SetPicksEffectiveOn(true);
 		}
 		public static void AddHoldableBlock(Block B)
 		{

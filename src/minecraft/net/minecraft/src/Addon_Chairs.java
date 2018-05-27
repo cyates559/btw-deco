@@ -18,7 +18,7 @@ public class Addon_Chairs
 		public BlockChairWood(int ID, String WoodType, String WoodName)
 		{
 			super(ID, Material.wood, WoodType + "wood", WoodName + " Wood");
-			ItemAxe.SetAllAxesToBeEffectiveVsBlock(this);
+			this.SetAxesEffectiveOn( true );
 			setStepSound(soundWoodFootstep);
 		}
 	}
@@ -27,7 +27,7 @@ public class Addon_Chairs
 		public BlockChairStone(int ID, String tag, String name)
 		{
 			super(ID, Material.rock, tag, name);
-			ItemPickaxe.SetAllPicksToBeEffectiveVsBlock(this);
+			this.SetAxesEffectiveOn(true);
 			setStepSound(soundStoneFootstep);
 		}
 	}

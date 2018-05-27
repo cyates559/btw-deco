@@ -28,7 +28,7 @@ public class Addon_WhiteBrick
 			setHardness(1.5F);
 			setResistance(10.0F);
 			setStepSound(Block.soundStoneFootstep);
-			ItemPickaxe.SetAllPicksToBeEffectiveVsBlock(this);
+			this.SetPicksEffectiveOn(true);
 			setUnlocalizedName("whiteStoneBrick");
 			setCreativeTab(CreativeTabs.tabBlock);
 			AddonManager.Register(this, new String[] { "regular", "mossy", "cracked", "chiseled" }, new String[] { "White Stone Bricks", "Mossy White Stone Bricks", "Cracked White Stone Bricks", "Chiseled White Stone" });

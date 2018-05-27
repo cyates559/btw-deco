@@ -14,7 +14,7 @@ public class Addon_HayBale {
 			setUnlocalizedName("blockHay");
 			setStepSound(soundGrassFootstep);
 			setCreativeTab(CreativeTabs.tabBlock);
-			ItemAxe.SetAllAxesToBeEffectiveVsBlock(this);
+			this.SetAxesEffectiveOn(true);
 			AddonManager.Register(this);
 			AddonManager.Name(this, "Hay Bale");
 		}

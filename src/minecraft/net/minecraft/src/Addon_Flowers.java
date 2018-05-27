@@ -403,7 +403,7 @@ public class Addon_Flowers
 			this.setStepSound(soundGlassFootstep);
 			this.setUnlocalizedName("fcBlockPlanter");
 			this.setTickRandomly(true);
-			ItemPickaxe.SetAllPicksToBeEffectiveVsBlock(this);
+			this.SetPicksEffectiveOn(true);
 			setCreativeTab(CreativeTabs.tabDecorations);
 		}
 
