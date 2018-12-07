@@ -18,16 +18,16 @@ public class Addon_Glass
 
 		FCRecipes.AddStokedCrucibleRecipe(new ItemStack(Block.glass, 1), new ItemStack[] {new ItemStack(glassChunk, 4)});
 		FCRecipes.AddStokedCrucibleRecipe(new ItemStack(glassChunk, 1), new ItemStack[] {new ItemStack(FCBetterThanWolves.fcItemPileSand)});
-		FCRecipes.AddShapelessVanillaRecipe(new ItemStack(glassChunk, 4), new Object[]{new ItemStack(Block.glass, 1)});
+		FCRecipes.AddShapelessRecipe(new ItemStack(glassChunk, 4), new Object[]{new ItemStack(Block.glass, 1)});
 
 		FCRecipes.RemoveVanillaRecipe(new ItemStack(Block.thinGlass, 16), new Object[] {"###", "###", '#', Block.glass});
-		FCRecipes.AddVanillaRecipe(new ItemStack(Block.thinGlass, 12), new Object[] {"###", "###", '#', Block.glass});
+		FCRecipes.AddRecipe(new ItemStack(Block.thinGlass, 12), new Object[] {"###", "###", '#', Block.glass});
 
 		FCCraftingManagerCrucibleStoked.getInstance().RemoveRecipe(new ItemStack(Block.glass, 3), new ItemStack[] {new ItemStack(Block.thinGlass, 8)});
 		FCRecipes.AddStokedCrucibleRecipe(new ItemStack(Block.glass, 1), new ItemStack[] {new ItemStack(Block.thinGlass, 2)});
 
 		FCRecipes.RemoveVanillaRecipe(new ItemStack(Item.glassBottle, 3), new Object[] {"# #", " # ", '#', Block.glass});
-		FCRecipes.AddVanillaRecipe(new ItemStack(Item.glassBottle, 3), new Object[] {" # ", "# #", "###", '#', glassChunk});
+		FCRecipes.AddRecipe(new ItemStack(Item.glassBottle, 3), new Object[] {" # ", "# #", "###", '#', glassChunk});
 		FCRecipes.AddStokedCrucibleRecipe(new ItemStack(glassChunk, 2), new ItemStack[] {new ItemStack(Item.glassBottle, 1)});
 	}
 	public static class BlockStainedGlass extends FCBlockGlass

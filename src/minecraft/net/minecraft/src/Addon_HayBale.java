@@ -7,7 +7,7 @@ public class Addon_HayBale
 		hayBale = new BlockBale(3025);
 		AddonManager.MakeStorage(Item.wheat, hayBale);
 	}
-	public static class BlockBale extends Block implements FCIBlock
+	public static class BlockBale extends Block
 	{
 		public BlockBale(int id)
 		{
@@ -19,19 +19,19 @@ public class Addon_HayBale
 			AddonManager.Register(this);
 			AddonManager.Name(this, "Hay Bale");
 		}
-		public boolean isOpaqueCube()
+		@Override public boolean isOpaqueCube()
 		{
 			return true;
 		}
-		public boolean renderAsNormalBlock()
+		@Override public boolean renderAsNormalBlock()
 		{
 			return true;
 		}
-		public boolean canDropFromExplosion(Explosion var1)
+		@Override public boolean canDropFromExplosion(Explosion var1)
 		{
 			return false;
 		}
-		public void onBlockDestroyedByExplosion(World world, int X, int Y, int Z, Explosion exp)
+		@Override public void onBlockDestroyedByExplosion(World world, int X, int Y, int Z, Explosion exp)
 		{
 			float v = 1.0F;
 
@@ -45,54 +45,54 @@ public class Addon_HayBale
 					dropBlockAsItem_do(world, X, Y, Z, new ItemStack(Item.wheat));
 		}
 		
-		public int GetFacing(IBlockAccess access, int X, int Y, int Z)
+		@Override public int GetFacing(IBlockAccess access, int X, int Y, int Z)
 		{
 			return access.getBlockMetadata(X,Y,Z);
 		}
-		public void SetFacing(World world, int X, int Y, int Z, int facing)
+		@Override public void SetFacing(World world, int X, int Y, int Z, int facing)
 		{
 			world.setBlockMetadataWithNotify(X,Y,Z,facing);
 		}
-		public int GetFacingFromMetadata(int meta)
+		@Override public int GetFacing(int meta)
 		{
 			return meta;
 		}
-		public int SetFacingInMetadata(int var1, int var2)
+		@Override public int SetFacing(int var1, int var2)
 		{
 			return var2;
 		}
-		public boolean CanRotateOnTurntable(IBlockAccess access, int X, int Y, int Z)
+		@Override public boolean CanRotateOnTurntable(IBlockAccess access, int X, int Y, int Z)
 		{
 			return access.getBlockMetadata(X,Y,Z)!=0;
 		}
-		public boolean CanTransmitRotationHorizontallyOnTurntable(IBlockAccess access, int X, int Y, int Z)
+		@Override public boolean CanTransmitRotationHorizontallyOnTurntable(IBlockAccess access, int X, int Y, int Z)
 		{
 			return true;
 		}
-		public boolean CanTransmitRotationVerticallyOnTurntable(IBlockAccess access, int X, int Y, int Z)
+		@Override public boolean CanTransmitRotationVerticallyOnTurntable(IBlockAccess access, int X, int Y, int Z)
 		{
 			return true;
 		}
-		public void RotateAroundJAxis(World world, int X, int Y, int Z, boolean var5)
+		@Override public boolean RotateAroundJAxis(World world, int X, int Y, int Z, boolean var5)
 		{
-			FCUtilsMisc.StandardRotateAroundJ(this, world, X, Y, Z, var5);
+			return FCUtilsMisc.StandardRotateAroundJ(this, world, X, Y, Z, var5);
 		}
-		public int RotateMetadataAroundJAxis(int var1, boolean var2)
+		@Override public int RotateMetadataAroundJAxis(int var1, boolean var2)
 		{
 			return FCUtilsMisc.StandardRotateMetadataAroundJ(this, var1, var2);
 		}
-		public boolean ToggleFacing(World world, int X, int Y, int Z, boolean var5)
+		@Override public boolean ToggleFacing(World world, int X, int Y, int Z, boolean var5)
 		{
 			this.RotateAroundJAxis(world, X, Y, Z, var5);
 			return true;
 		}
-		public int onBlockPlaced(World var1, int var2, int var3, int var4, int var5, float var6, float var7, float var8, int var9)
+		@Override public int onBlockPlaced(World var1, int var2, int var3, int var4, int var5, float var6, float var7, float var8, int var9)
 		{
 			if(var5<2)return 0;
 			else if(var5<4)return 1;
 			else return 2;
 		}
-		public void onBlockPlacedBy(World var1, int var2, int var3, int var4, EntityLiving var5, ItemStack var6)
+		@Override public void onBlockPlacedBy(World var1, int var2, int var3, int var4, EntityLiving var5, ItemStack var6)
 		{/*
 			int var7 = FCUtilsMisc.ConvertPlacingEntityOrientationToBlockFacing(var5);
 			
@@ -103,7 +103,7 @@ public class Addon_HayBale
 		}
 //CLIENT ONLY
 		static Icon topIcon;
-		public Icon getIcon(int side, int meta)
+		@Override public Icon getIcon(int side, int meta)
 		{
 			switch(meta)
 			{
@@ -115,12 +115,12 @@ public class Addon_HayBale
 					return (side>3)?topIcon:blockIcon;
 			}
 		}
-		public void registerIcons(IconRegister r)
+		@Override public void registerIcons(IconRegister r)
 		{
 			blockIcon = r.registerIcon("ginger_hay_side");
 			topIcon = r.registerIcon("ginger_hay_top");
 		}
-		public boolean RenderBlock(RenderBlocks r, int X, int Y, int Z)
+		@Override public boolean RenderBlock(RenderBlocks r, int X, int Y, int Z)
 		{
 			int f = GetFacing(r.blockAccess, X, Y, Z);
 			switch(f)

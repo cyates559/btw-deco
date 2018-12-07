@@ -8,17 +8,17 @@ public class Addon_Chairs
 		birchWoodChair = new BlockChairWood(3037, "birch", "Birch");
 		spruceWoodChair = new BlockChairWood(3038, "spruce", "Spruce");
 		jungleWoodChair = new BlockChairWood(3039, "jungle", "Jungle");
-		FCRecipes.AddVanillaRecipe(new ItemStack(oakWoodChair, 4), new Object[] {"#  ", "###","X X", '#', new ItemStack(FCBetterThanWolves.fcBlockWoodSidingItemStubID, 1, 0), 'X', new ItemStack(FCBetterThanWolves.fcBlockWoodMouldingItemStubID, 1, 0)});
-		FCRecipes.AddVanillaRecipe(new ItemStack(birchWoodChair, 4), new Object[] {"#  ", "###","X X", '#', new ItemStack(FCBetterThanWolves.fcBlockWoodSidingItemStubID, 1, 2), 'X', new ItemStack(FCBetterThanWolves.fcBlockWoodMouldingItemStubID, 1, 2)});
-		FCRecipes.AddVanillaRecipe(new ItemStack(spruceWoodChair, 4), new Object[] {"#  ", "###","X X", '#', new ItemStack(FCBetterThanWolves.fcBlockWoodSidingItemStubID, 1, 1), 'X', new ItemStack(FCBetterThanWolves.fcBlockWoodMouldingItemStubID, 1, 1)});
-		FCRecipes.AddVanillaRecipe(new ItemStack(jungleWoodChair, 4), new Object[] {"#  ", "###","X X", '#', new ItemStack(FCBetterThanWolves.fcBlockWoodSidingItemStubID, 1, 3), 'X', new ItemStack(FCBetterThanWolves.fcBlockWoodMouldingItemStubID, 1, 3)});
+		FCRecipes.AddRecipe(new ItemStack(oakWoodChair, 4), new Object[] {"#  ", "###","X X", '#', new ItemStack(FCBetterThanWolves.fcBlockWoodSidingItemStubID, 1, 0), 'X', new ItemStack(FCBetterThanWolves.fcBlockWoodMouldingItemStubID, 1, 0)});
+		FCRecipes.AddRecipe(new ItemStack(birchWoodChair, 4), new Object[] {"#  ", "###","X X", '#', new ItemStack(FCBetterThanWolves.fcBlockWoodSidingItemStubID, 1, 2), 'X', new ItemStack(FCBetterThanWolves.fcBlockWoodMouldingItemStubID, 1, 2)});
+		FCRecipes.AddRecipe(new ItemStack(spruceWoodChair, 4), new Object[] {"#  ", "###","X X", '#', new ItemStack(FCBetterThanWolves.fcBlockWoodSidingItemStubID, 1, 1), 'X', new ItemStack(FCBetterThanWolves.fcBlockWoodMouldingItemStubID, 1, 1)});
+		FCRecipes.AddRecipe(new ItemStack(jungleWoodChair, 4), new Object[] {"#  ", "###","X X", '#', new ItemStack(FCBetterThanWolves.fcBlockWoodSidingItemStubID, 1, 3), 'X', new ItemStack(FCBetterThanWolves.fcBlockWoodMouldingItemStubID, 1, 3)});
 	}
 	public static class BlockChairWood extends BlockChair
 	{
 		public BlockChairWood(int ID, String WoodType, String WoodName)
 		{
 			super(ID, Material.wood, WoodType + "wood", WoodName + " Wood");
-			this.SetAxesEffectiveOn(true);
+			this.SetAxesEffectiveOn( true );
 			setStepSound(soundWoodFootstep);
 		}
 	}
@@ -31,7 +31,7 @@ public class Addon_Chairs
 			setStepSound(soundStoneFootstep);
 		}
 	}
-	public static class BlockChair extends Block implements FCIBlock
+	public static class BlockChair extends Block
 	{
 		public BlockChair(int ID, Material MyMaterial, String Tag, String Name)
 		{
@@ -48,11 +48,11 @@ public class Addon_Chairs
 		{
 			var1.setBlockMetadataWithNotify(var2, var3, var4, var5);
 		}
-		public int GetFacingFromMetadata(int Meta)
+		public int GetFacing(int Meta)
 		{
 			return Meta;
 		}
-		public int SetFacingInMetadata(int var1, int var2)
+		public int SetFacing(int var1, int var2)
 		{
 			return var2;
 		}
@@ -68,9 +68,9 @@ public class Addon_Chairs
 		{
 			return false;
 		}
-		public void RotateAroundJAxis(World var1, int var2, int var3, int var4, boolean var5)
+		public boolean RotateAroundJAxis(World var1, int var2, int var3, int var4, boolean var5)
 		{
-			FCUtilsMisc.StandardRotateAroundJ(this, var1, var2, var3, var4, var5);
+			return FCUtilsMisc.StandardRotateAroundJ(this, var1, var2, var3, var4, var5);
 		}
 		public int RotateMetadataAroundJAxis(int var1, boolean var2)
 		{
@@ -98,11 +98,11 @@ public class Addon_Chairs
 			{
 				var5 = FCUtilsMisc.GetOppositeFacing(var5);
 			}
-			return SetFacingInMetadata(var9, var5);
+			return SetFacing(var9, var5);
 		}
 		public void onBlockPlacedBy(World var1, int var2, int var3, int var4, EntityLiving var5, ItemStack var6)
 		{
-			int var7 = FCUtilsMisc.ConvertPlacingEntityOrientationToBlockFacing(var5);
+			int var7 = FCUtilsMisc.ConvertPlacingEntityOrientationToBlockFacingReversed(var5);
 			this.SetFacing(var1, var2, var3, var4, var7);
 			
 		}

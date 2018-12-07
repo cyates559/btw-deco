@@ -40,21 +40,21 @@ public class Addon_ClaySubBlocks
 		FCRecipes.AddAnvilRecipe(new ItemStack(claySidingAndCorner, 8, 0), new Object[] {"####", '#', new ItemStack(Addon_Clay.hardenedClay, 1, 0)});
 		FCRecipes.AddAnvilRecipe(new ItemStack(clayMouldingAndDecorative, 8, 0), new Object[] {"####", '#', new ItemStack(claySidingAndCorner, 1, 0)});
 		FCRecipes.AddAnvilRecipe(new ItemStack(claySidingAndCorner, 8, 1), new Object[] {"####", '#', new ItemStack(clayMouldingAndDecorative, 1, 0)});
-		FCRecipes.AddVanillaRecipe(new ItemStack(clayMouldingAndDecorative, 1, 12), new Object[] {"M", "M", "M", 'M', new ItemStack(clayMouldingAndDecorative, 1, 0)});
-		FCRecipes.AddVanillaRecipe(new ItemStack(clayMouldingAndDecorative, 6, 13), new Object[] {" S ", "###", "###", '#', new ItemStack(Addon_Clay.hardenedClay, 1, 0), 'S', new ItemStack(claySidingAndCorner, 8, 0)});
-		FCRecipes.AddVanillaRecipe(new ItemStack(clayMouldingAndDecorative, 4, 15), new Object[] {"###", " X ", " X ", '#', new ItemStack(claySidingAndCorner, 1, 0), 'X', new ItemStack(clayMouldingAndDecorative, 1, 0)});
-		FCRecipes.AddVanillaRecipe(new ItemStack(claySidingAndCorner, 4, 12), new Object[] {"###", " X ", '#', new ItemStack(claySidingAndCorner, 1, 0), 'X', new ItemStack(clayMouldingAndDecorative, 1, 0)});
+		FCRecipes.AddRecipe(new ItemStack(clayMouldingAndDecorative, 1, 12), new Object[] {"M", "M", "M", 'M', new ItemStack(clayMouldingAndDecorative, 1, 0)});
+		FCRecipes.AddRecipe(new ItemStack(clayMouldingAndDecorative, 6, 13), new Object[] {" S ", "###", "###", '#', new ItemStack(Addon_Clay.hardenedClay, 1, 0), 'S', new ItemStack(claySidingAndCorner, 8, 0)});
+		FCRecipes.AddRecipe(new ItemStack(clayMouldingAndDecorative, 4, 15), new Object[] {"###", " X ", " X ", '#', new ItemStack(claySidingAndCorner, 1, 0), 'X', new ItemStack(clayMouldingAndDecorative, 1, 0)});
+		FCRecipes.AddRecipe(new ItemStack(claySidingAndCorner, 4, 12), new Object[] {"###", " X ", '#', new ItemStack(claySidingAndCorner, 1, 0), 'X', new ItemStack(clayMouldingAndDecorative, 1, 0)});
 
-		FCRecipes.AddVanillaRecipe(new ItemStack(claySidingAndCorner, 2, 14), new Object[] {"###", "###", '#', new ItemStack(Addon_Clay.hardenedClay, 1, 0)});
-		FCRecipes.AddVanillaRecipe(new ItemStack(claySidingAndCorner, 2, 14), new Object[] {"###", '#', new ItemStack(clayMouldingAndDecorative, 1, 0)});
+		FCRecipes.AddRecipe(new ItemStack(claySidingAndCorner, 2, 14), new Object[] {"###", "###", '#', new ItemStack(Addon_Clay.hardenedClay, 1, 0)});
+		FCRecipes.AddRecipe(new ItemStack(claySidingAndCorner, 2, 14), new Object[] {"###", '#', new ItemStack(clayMouldingAndDecorative, 1, 0)});
 
-		FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Addon_Clay.hardenedClay, 1, 0), new Object[] {new ItemStack(claySidingAndCorner, 1, 0), new ItemStack(claySidingAndCorner, 1, 0)});
-		FCRecipes.AddShapelessVanillaRecipe(new ItemStack(claySidingAndCorner, 1, 0), new Object[] {new ItemStack(clayMouldingAndDecorative, 1, 0), new ItemStack(clayMouldingAndDecorative, 1, 0)});
-		FCRecipes.AddShapelessVanillaRecipe(new ItemStack(clayMouldingAndDecorative, 1, 0), new Object[] {new ItemStack(claySidingAndCorner, 1, 1), new ItemStack(claySidingAndCorner, 1, 1)});
+		FCRecipes.AddShapelessRecipe(new ItemStack(Addon_Clay.hardenedClay, 1, 0), new Object[] {new ItemStack(claySidingAndCorner, 1, 0), new ItemStack(claySidingAndCorner, 1, 0)});
+		FCRecipes.AddShapelessRecipe(new ItemStack(claySidingAndCorner, 1, 0), new Object[] {new ItemStack(clayMouldingAndDecorative, 1, 0), new ItemStack(clayMouldingAndDecorative, 1, 0)});
+		FCRecipes.AddShapelessRecipe(new ItemStack(clayMouldingAndDecorative, 1, 0), new Object[] {new ItemStack(claySidingAndCorner, 1, 1), new ItemStack(claySidingAndCorner, 1, 1)});
 		
 		//Stairs
-		FCRecipes.AddVanillaRecipe(new ItemStack(clayStairs, 4, 0), new Object[]{"#  ","## ","###",'#',new ItemStack(Addon_Clay.hardenedClay, 1, 0)});
-		FCRecipes.AddVanillaRecipe(new ItemStack(clayStairs, 1, 0), new Object[]{"# ","##",'#',new ItemStack(clayMouldingAndDecorative, 1, 0)});
+		FCRecipes.AddRecipe(new ItemStack(clayStairs, 4, 0), new Object[]{"#  ","## ","###",'#',new ItemStack(Addon_Clay.hardenedClay, 1, 0)});
+		FCRecipes.AddRecipe(new ItemStack(clayStairs, 1, 0), new Object[]{"# ","##",'#',new ItemStack(clayMouldingAndDecorative, 1, 0)});
 		for(i=0;i<16;i++)
 		{
 			//Sub blocks
@@ -62,22 +62,22 @@ public class Addon_ClaySubBlocks
 			FCRecipes.AddAnvilRecipe(new ItemStack(stainedClayMouldingAndDecorative[i], 8, 0), new Object[] {"####", '#', new ItemStack(stainedClaySidingAndCorner[i], 1, 0)});
 			FCRecipes.AddAnvilRecipe(new ItemStack(stainedClaySidingAndCorner[i], 8, 1), new Object[] {"####", '#', new ItemStack(stainedClayMouldingAndDecorative[i], 1, 0)});
 			
-			FCRecipes.AddVanillaRecipe(new ItemStack(stainedClayMouldingAndDecorative[i], 1, 12), new Object[] {"M", "M", "M", 'M', new ItemStack(stainedClayMouldingAndDecorative[i], 1, 0)});
-			FCRecipes.AddVanillaRecipe(new ItemStack(stainedClayMouldingAndDecorative[i], 6, 13), new Object[] {" S ", "###", "###", '#', new ItemStack(Addon_Clay.stainedClay, 1, i), 'S', new ItemStack(stainedClaySidingAndCorner[i], 8, 0)});
-			FCRecipes.AddVanillaRecipe(new ItemStack(stainedClayMouldingAndDecorative[i], 4, 15), new Object[] {"###", " X ", " X ", '#', new ItemStack(stainedClaySidingAndCorner[i], 1, 0), 'X', new ItemStack(stainedClayMouldingAndDecorative[i], 1, 0)});
-			FCRecipes.AddVanillaRecipe(new ItemStack(stainedClaySidingAndCorner[i], 4, 12), new Object[] {"###", " X ", '#', new ItemStack(stainedClaySidingAndCorner[i], 1, 0), 'X', new ItemStack(stainedClayMouldingAndDecorative[i], 1, 0)});
+			FCRecipes.AddRecipe(new ItemStack(stainedClayMouldingAndDecorative[i], 1, 12), new Object[] {"M", "M", "M", 'M', new ItemStack(stainedClayMouldingAndDecorative[i], 1, 0)});
+			FCRecipes.AddRecipe(new ItemStack(stainedClayMouldingAndDecorative[i], 6, 13), new Object[] {" S ", "###", "###", '#', new ItemStack(Addon_Clay.stainedClay, 1, i), 'S', new ItemStack(stainedClaySidingAndCorner[i], 8, 0)});
+			FCRecipes.AddRecipe(new ItemStack(stainedClayMouldingAndDecorative[i], 4, 15), new Object[] {"###", " X ", " X ", '#', new ItemStack(stainedClaySidingAndCorner[i], 1, 0), 'X', new ItemStack(stainedClayMouldingAndDecorative[i], 1, 0)});
+			FCRecipes.AddRecipe(new ItemStack(stainedClaySidingAndCorner[i], 4, 12), new Object[] {"###", " X ", '#', new ItemStack(stainedClaySidingAndCorner[i], 1, 0), 'X', new ItemStack(stainedClayMouldingAndDecorative[i], 1, 0)});
 
 			//Fences
-			FCRecipes.AddVanillaRecipe(new ItemStack(stainedClaySidingAndCorner[i], 2, 14), new Object[] {"###", "###", '#', new ItemStack(Addon_Clay.stainedClay, 1, i)});
-			FCRecipes.AddVanillaRecipe(new ItemStack(stainedClaySidingAndCorner[i], 2, 14), new Object[] {"###", '#', new ItemStack(stainedClayMouldingAndDecorative[i], 1, 0)});
+			FCRecipes.AddRecipe(new ItemStack(stainedClaySidingAndCorner[i], 2, 14), new Object[] {"###", "###", '#', new ItemStack(Addon_Clay.stainedClay, 1, i)});
+			FCRecipes.AddRecipe(new ItemStack(stainedClaySidingAndCorner[i], 2, 14), new Object[] {"###", '#', new ItemStack(stainedClayMouldingAndDecorative[i], 1, 0)});
 
-			FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Addon_Clay.stainedClay, 1, i), new Object[] {new ItemStack(stainedClaySidingAndCorner[i], 1, 0), new ItemStack(stainedClaySidingAndCorner[i], 1, 0)});
-			FCRecipes.AddShapelessVanillaRecipe(new ItemStack(stainedClaySidingAndCorner[i], 1, 0), new Object[] {new ItemStack(stainedClayMouldingAndDecorative[i], 1, 0), new ItemStack(stainedClayMouldingAndDecorative[i], 1, 0)});
-			FCRecipes.AddShapelessVanillaRecipe(new ItemStack(stainedClayMouldingAndDecorative[i], 1, 0), new Object[] {new ItemStack(stainedClaySidingAndCorner[i], 1, 1), new ItemStack(stainedClaySidingAndCorner[i], 1, 1)});
+			FCRecipes.AddShapelessRecipe(new ItemStack(Addon_Clay.stainedClay, 1, i), new Object[] {new ItemStack(stainedClaySidingAndCorner[i], 1, 0), new ItemStack(stainedClaySidingAndCorner[i], 1, 0)});
+			FCRecipes.AddShapelessRecipe(new ItemStack(stainedClaySidingAndCorner[i], 1, 0), new Object[] {new ItemStack(stainedClayMouldingAndDecorative[i], 1, 0), new ItemStack(stainedClayMouldingAndDecorative[i], 1, 0)});
+			FCRecipes.AddShapelessRecipe(new ItemStack(stainedClayMouldingAndDecorative[i], 1, 0), new Object[] {new ItemStack(stainedClaySidingAndCorner[i], 1, 1), new ItemStack(stainedClaySidingAndCorner[i], 1, 1)});
 			
 			//Stairs
-			FCRecipes.AddVanillaRecipe(new ItemStack(stainedClayStairs[i], 4, 0), new Object[]{"#  ","## ","###",'#',new ItemStack(Addon_Clay.stainedClay, 1, i)});
-			FCRecipes.AddVanillaRecipe(new ItemStack(stainedClayStairs[i], 1, 0), new Object[]{"# ","##",'#',new ItemStack(stainedClayMouldingAndDecorative[i], 1, 0)});
+			FCRecipes.AddRecipe(new ItemStack(stainedClayStairs[i], 4, 0), new Object[]{"#  ","## ","###",'#',new ItemStack(Addon_Clay.stainedClay, 1, i)});
+			FCRecipes.AddRecipe(new ItemStack(stainedClayStairs[i], 1, 0), new Object[]{"# ","##",'#',new ItemStack(stainedClayMouldingAndDecorative[i], 1, 0)});
 		}
 	}
 }

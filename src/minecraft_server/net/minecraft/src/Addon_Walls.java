@@ -10,7 +10,7 @@ public class Addon_Walls
 		// FCRecipes.RemoveVanillaRecipe(new ItemStack(Block.cobblestoneWall, 6, 0), new Object[] {"###", "###", '#', Block.cobblestone});
 		// FCRecipes.RemoveVanillaRecipe(new ItemStack(Block.cobblestoneWall, 6, 1), new Object[] {"###", "###", '#', Block.cobblestoneMossy});
 
-		// FCRecipes.AddVanillaRecipe(new ItemStack(Block.cobblestoneWall, 2, 0), new Object[] {"###", "###", '#', Block.cobblestone});
-		// FCRecipes.AddVanillaRecipe(new ItemStack(Block.cobblestoneWall, 2, 1), new Object[] {"###", "###", '#', Block.cobblestoneMossy});
+		// FCRecipes.AddRecipe(new ItemStack(Block.cobblestoneWall, 2, 0), new Object[] {"###", "###", '#', Block.cobblestone});
+		// FCRecipes.AddRecipe(new ItemStack(Block.cobblestoneWall, 2, 1), new Object[] {"###", "###", '#', Block.cobblestoneMossy});
 	}
 }

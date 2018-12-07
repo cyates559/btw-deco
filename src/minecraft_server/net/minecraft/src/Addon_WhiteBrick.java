@@ -15,10 +15,10 @@ public class Addon_WhiteBrick
 
 		AddonManager.NameSubBlocks_Wall(whiteBrickSidingAndCorner, whiteBrickMouldingAndDecorative, "White Stone Brick");
 	
-		FCRecipes.AddVanillaRecipe(new ItemStack(whiteStoneBrick,4,0), new Object[]{"XX","XX",'X',new ItemStack(FCBetterThanWolves.fcAestheticOpaque,1,9)});
+		FCRecipes.AddRecipe(new ItemStack(whiteStoneBrick,4,0), new Object[]{"XX","XX",'X',new ItemStack(FCBetterThanWolves.fcAestheticOpaque,1,9)});
 		FCRecipes.AddAnvilRecipe(new ItemStack(whiteStoneBrick, 12, 3), new Object[] {"####", "#  #", "#  #", "####", '#', whiteStoneBrick});
 		FCRecipes.AddSubBlockRecipesOfType(whiteStoneBrick, 0, whiteBrickSidingAndCorner, whiteBrickMouldingAndDecorative, true);
-		FCRecipes.AddVanillaRecipe(new ItemStack(whiteBrickStairs), new Object[] {"# ", "##", '#', new ItemStack(whiteBrickMouldingAndDecorative)});
+		FCRecipes.AddRecipe(new ItemStack(whiteBrickStairs), new Object[] {"# ", "##", '#', new ItemStack(whiteBrickMouldingAndDecorative)});
 	}
 	public static class BlockStoneBrick extends Block
 	{

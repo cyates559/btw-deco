@@ -26,14 +26,14 @@ public class Addon_Lanterns
 		AddonManager.Register(fenceSteel, "Wrought Iron Bars");
 		AddonManager.Name(bottleHempOil, "Hemp Oil");
 
-		FCRecipes.AddVanillaRecipe(new ItemStack(paperWall, 4), new Object[] { "ppp", "pwp", "ppp", 'p', Item.paper, 'w', new ItemStack(FCBetterThanWolves.fcBlockWoodMouldingItemStubID, 1, 32767) });
+		FCRecipes.AddRecipe(new ItemStack(paperWall, 4), new Object[] { "ppp", "pwp", "ppp", 'p', Item.paper, 'w', new ItemStack(FCBetterThanWolves.fcBlockWoodMouldingItemStubID, 1, 32767) });
 		FCRecipes.AddStokedCrucibleRecipe(new ItemStack(Item.ingotIron, 1), new ItemStack[] { new ItemStack(fenceSteel, 1) });
 		FCRecipes.AddAnvilRecipe(new ItemStack(fenceSteel, 10), new Object[] { " X X", "XXXX", " X X", " X X", 'X', new ItemStack(Item.ingotIron) });
 		
-		FCRecipes.AddShapelessVanillaRecipe(new ItemStack(bottleHempOil,1), new Object[]{Item.glassBottle, FCBetterThanWolves.fcHempSeeds});
-		FCRecipes.AddVanillaRecipe(new ItemStack(lanternPaper,1),new Object[]{"pwp","wcw","pwp",'c', new ItemStack(FCBetterThanWolves.fcItemCandle,1,32767), 'p', Item.paper, 'w', new ItemStack(FCBetterThanWolves.fcBlockWoodMouldingItemStubID, 1, 32767)});
+		FCRecipes.AddShapelessRecipe(new ItemStack(bottleHempOil,1), new Object[]{Item.glassBottle, FCBetterThanWolves.fcHempSeeds});
+		FCRecipes.AddRecipe(new ItemStack(lanternPaper,1),new Object[]{"pwp","wcw","pwp",'c', new ItemStack(FCBetterThanWolves.fcItemCandle,1,32767), 'p', Item.paper, 'w', new ItemStack(FCBetterThanWolves.fcBlockWoodMouldingItemStubID, 1, 32767)});
 		FCRecipes.AddAnvilRecipe(new ItemStack(lanternGold,2), new Object[]{" ss "," gg ","cggc","cggc",'s',Block.stone,'g',Item.goldNugget,'c', new ItemStack(FCBetterThanWolves.fcItemCandle,1,32767)});
-		FCRecipes.AddVanillaRecipe(new ItemStack(lanternSteel,1),new Object[]{" s ","shs"," s ",'s',fenceSteel,'h',bottleHempOil});
+		FCRecipes.AddRecipe(new ItemStack(lanternSteel,1),new Object[]{" s ","shs"," s ",'s',fenceSteel,'h',bottleHempOil});
 		FCRecipes.AddStokedCrucibleRecipe(new ItemStack(Item.ingotIron,4), new ItemStack[]{new ItemStack(lanternSteel,1)});
 	}
 	/*public static class BlockSteelFence extends Block implements FCIBlock
@@ -50,11 +50,11 @@ public class Addon_Lanterns
 		{
 		}
 
-		public int GetFacingFromMetadata(int var1)
+		public int GetFacing(int var1)
 		{
 		}
 
-		public int SetFacingInMetadata(int var1, int var2)
+		public int SetFacing(int var1, int var2)
 		{
 		}
 
@@ -96,19 +96,20 @@ public class Addon_Lanterns
 			AddonManager.Register(this, "Chandelier");
 			this.SetPicksEffectiveOn(true);
 		}
-		public boolean isOpaqueCube()
+		@Override public boolean isOpaqueCube()
 		{
 			return false;
 		}
-		public boolean renderAsNormalBlock()
+		@Override public boolean renderAsNormalBlock()
 		{
 			return false;
 		}
-		public int getRenderType()
+		@Override public int getRenderType()
 		{
 			return 1;
 		}
-		public void randomDisplayTick(World CurrentWorld, int X_, int Y_, int Z_, Random par5Random)
+//CLIENT ONLY
+		@Override public void randomDisplayTick(World CurrentWorld, int X_, int Y_, int Z_, Random par5Random)
 		{
 
 			float H = .55F, L = .15F, X = (float)X_, Y = (float)Y_, Z = (float)Z_;
@@ -125,8 +126,7 @@ public class Addon_Lanterns
 			CurrentWorld.spawnParticle("smoke", X+1F-L, Y+H, Z+1F-L, 0.0D, 0.0D, 0.0D);
 			CurrentWorld.spawnParticle("flame", X+1F-L, Y+H, Z+1F-L, 0.0D, 0.0D, 0.0D);
 		}
-//CLIENT ONLY
-		public boolean RenderBlock(RenderBlocks Render, int X, int Y, int Z)
+		@Override public boolean RenderBlock(RenderBlocks Render, int X, int Y, int Z)
 		{
 			Render.setRenderBounds(.375D, .875D, .375D, .625D, 1D, .625D);
 			Render.renderStandardBlock(Block.stone, X, Y, Z);
@@ -135,7 +135,7 @@ public class Addon_Lanterns
 		}
 //
 	}
-	public static class BlockLantern extends Block implements FCIBlock
+	public static class BlockLantern extends Block
 	{
 		String tag;
 		boolean animate;
@@ -153,16 +153,16 @@ public class Addon_Lanterns
 			AddonManager.Register(this, name);
 			FCBlockAestheticNonOpaque_LightningRodFix.AddHoldableBlock(this);
 		}
-		public int onBlockPlaced(World var1, int var2, int var3, int var4, int var5, float var6, float var7, float var8, int var9)
+		@Override public int onBlockPlaced(World var1, int var2, int var3, int var4, int var5, float var6, float var7, float var8, int var9)
 		{
 			setBlockBoundsBasedOnState(var1, var2, var3,var4);
-			return SetFacingInMetadata(var9, var5);
+			return SetFacing(var9, var5);
 		}
-		public boolean renderAsNormalBlock()
+		@Override public boolean renderAsNormalBlock()
 		{
 			return false;
 		}
-		public void setBlockBoundsBasedOnState(IBlockAccess Access, int X, int Y, int Z)
+		@Override public void setBlockBoundsBasedOnState(IBlockAccess Access, int X, int Y, int Z)
 		{
 			switch (GetFacing(Access, X, Y, Z))
 			{
@@ -175,7 +175,7 @@ public class Addon_Lanterns
 				case 5: setBlockBounds(0F,0F,.3125F,.375F,.5F,.6875F);   break;
 			}
 		}
-		public AxisAlignedBB getCollisionBoundingBoxFromPool(World CurrentWorld, int X, int Y, int Z)
+		@Override public AxisAlignedBB getCollisionBoundingBoxFromPool(World CurrentWorld, int X, int Y, int Z)
 		{
 			switch (GetFacing(CurrentWorld, X, Y, Z))
 			{
@@ -188,71 +188,71 @@ public class Addon_Lanterns
 				case 5: return AxisAlignedBB.getAABBPool().getAABB(X,		Y,	Z+.3125D,	X+.375D,	Y+.5D,	Z+.6875D);
 			}
 		}
-		public void setBlockBoundsForItemRender()
+		@Override public void setBlockBoundsForItemRender()
 		{
 			setBlockBounds(.3125F, 0F, .3125F, .6875F, .5F, .6875F);
 		}
-		public boolean isOpaqueCube()
+		@Override public boolean isOpaqueCube()
 		{
 			return false;
 		}
-		public int GetFacing(IBlockAccess var1, int var2, int var3, int var4)
+		@Override public int GetFacing(IBlockAccess var1, int var2, int var3, int var4)
 		{
 			return var1.getBlockMetadata(var2, var3, var4);
 		}
-		public void SetFacing(World var1, int var2, int var3, int var4, int var5)
+		@Override public void SetFacing(World var1, int var2, int var3, int var4, int var5)
 		{
 			var1.setBlockMetadataWithNotify(var2, var3, var4, var5);
 		}
-		public int GetFacingFromMetadata(int var1)
+		@Override public int GetFacing(int var1)
 		{
 			return var1;
 		}
-		public int SetFacingInMetadata(int var1, int var2)
+		@Override public int SetFacing(int var1, int var2)
 		{
 			return var2;
 		}
-		public boolean CanRotateOnTurntable(IBlockAccess var1, int var2, int var3, int var4)
+		@Override public boolean CanRotateOnTurntable(IBlockAccess var1, int var2, int var3, int var4)
 		{
 			return false;
 		}
-		public boolean CanTransmitRotationHorizontallyOnTurntable(IBlockAccess var1, int var2, int var3, int var4)
+		@Override public boolean CanTransmitRotationHorizontallyOnTurntable(IBlockAccess var1, int var2, int var3, int var4)
 		{
 			return false;
 		}
-		public boolean CanTransmitRotationVerticallyOnTurntable(IBlockAccess var1, int var2, int var3, int var4)
+		@Override public boolean CanTransmitRotationVerticallyOnTurntable(IBlockAccess var1, int var2, int var3, int var4)
 		{
 			return false;
 		}
-		public void RotateAroundJAxis(World var1, int var2, int var3, int var4, boolean var5)
+		@Override public boolean RotateAroundJAxis(World var1, int var2, int var3, int var4, boolean var5)
 		{
-			
+			return false;
 		}
-		public int RotateMetadataAroundJAxis(int var1, boolean var2)
+		@Override public int RotateMetadataAroundJAxis(int var1, boolean var2)
 		{
 			return 0;
 		}
-		public boolean ToggleFacing(World var1, int var2, int var3, int var4, boolean var5)
+		@Override public boolean ToggleFacing(World var1, int var2, int var3, int var4, boolean var5)
 		{
 			return false;
 		}
 //CLIENT ONLY
 		Icon TopIcon;
-		public boolean shouldSideBeRendered(IBlockAccess var1, int var2, int var3, int var4, int var5)
+		@Override public boolean shouldSideBeRendered(IBlockAccess var1, int var2, int var3, int var4, int var5)
 		{
 			return var5 == 0 && this.minY > 0.0D ? true : (var5 == 1 && this.maxY < 1.0D ? true : (var5 == 2 && this.minZ > 0.0D ? true : (var5 == 3 && this.maxZ < 1.0D ? true : (var5 == 4 && this.minX > 0.0D ? true : (var5 == 5 && this.maxX < 1.0D ? true : !var1.isBlockOpaqueCube(var2, var3, var4))))));
 		}
-		public void registerIcons(IconRegister Register)
+		@Override public void registerIcons(IconRegister Register)
 		{
 			blockIcon = Register.registerIcon("ginger_lantern_"+tag+(animate?"_anim":""));
 			TopIcon = Register.registerIcon("ginger_lantern_"+tag+"_top");
 		}
-		public Icon getIcon(int Side, int Meta)
+		@Override public Icon getIcon(int side, int meta)
 		{
-			return Side < 2 ? TopIcon : blockIcon;
+			return side < 2 ? TopIcon : blockIcon;
 		}
-//
 	}
+//
 	public static class FCBlockAestheticNonOpaque_LightningRodFix extends FCBlockAestheticNonOpaque
 	{
 		static ArrayList BlocksThatCanBeHeld = new ArrayList();
@@ -273,12 +273,12 @@ public class Addon_Lanterns
 		}
 //CLIENT ONLY
 		public Icon LightningRodIcon;
-		public void registerIcons(IconRegister Register)
+		@Override public void registerIcons(IconRegister Register)
 		{
 			super.registerIcons(Register);
 			
 		}
-		public boolean RenderLightningRod(RenderBlocks var1, IBlockAccess BlockAccess, int X, int Y, int Z, Block var6)
+		@Override public boolean RenderLightningRod(RenderBlocks var1, IBlockAccess BlockAccess, int X, int Y, int Z, Block var6)
 		{
 			var1.setRenderBounds(0.46875D, 0.0D, 0.46875D, 0.53125D, 1.0D, 0.53125D);
 			FCClientUtilsRender.RenderStandardBlockWithTexture(var1, var6, X, Y, Z, LightningRodIcon);

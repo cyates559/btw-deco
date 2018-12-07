@@ -155,18 +155,18 @@ public class AddonManager extends FCAddOn
 	}
 	public static void MakeStorage(Item SubItem, Block Container)
 	{
-		FCRecipes.AddVanillaRecipe(new ItemStack(Container), new Object[]{"XXX","XXX","XXX",'X',SubItem});
-		FCRecipes.AddShapelessVanillaRecipe(new ItemStack(SubItem, 9), new ItemStack[]{new ItemStack(Container)});
+		FCRecipes.AddRecipe(new ItemStack(Container), new Object[]{"XXX","XXX","XXX",'X',SubItem});
+		FCRecipes.AddShapelessRecipe(new ItemStack(SubItem, 9), new ItemStack[]{new ItemStack(Container)});
 	}
 	public static void MakeStorage(Item SubItem, Item Container)
 	{
-		FCRecipes.AddVanillaRecipe(new ItemStack(Container), new Object[]{"XXX","XXX","XXX",'X',SubItem});
-		FCRecipes.AddShapelessVanillaRecipe(new ItemStack(SubItem, 9), new ItemStack[]{new ItemStack(Container)});
+		FCRecipes.AddRecipe(new ItemStack(Container), new Object[]{"XXX","XXX","XXX",'X',SubItem});
+		FCRecipes.AddShapelessRecipe(new ItemStack(SubItem, 9), new ItemStack[]{new ItemStack(Container)});
 	}
 	public static void MakeStorage(ItemStack SubItem, ItemStack Container)
 	{
-		FCRecipes.AddVanillaRecipe(Container, new Object[]{"XXX","XXX","XXX",'X',SubItem});
-		FCRecipes.AddShapelessVanillaRecipe(new ItemStack(SubItem.itemID, 9,SubItem.getItemDamage()), new ItemStack[]{Container});
+		FCRecipes.AddRecipe(Container, new Object[]{"XXX","XXX","XXX",'X',SubItem});
+		FCRecipes.AddShapelessRecipe(new ItemStack(SubItem.itemID, 9,SubItem.getItemDamage()), new ItemStack[]{Container});
 	}
 	public static void Register(Block Target)
 	{

@@ -39,12 +39,12 @@ public class Addon_Flowers
 //recipes//
 		//Change flowerpot recipe
 		FCRecipes.RemoveVanillaRecipe(new ItemStack(Item.flowerPot, 1), new Object[] {"# #", " # ", '#', Item.brick});
-		FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.flowerPot, 1), new ItemStack[]{new ItemStack(FCBetterThanWolves.fcItemPileDirt), new ItemStack(FCBetterThanWolves.fcUrn)});
-		for (int I = 0; I < 16; ++I)
-			FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Block.cloth, 1, BlockCloth.getDyeFromBlock(I)), new Object[] {new ItemStack(Item.dyePowder, 1, I+16), new ItemStack(Item.itemsList[Block.cloth.blockID], 1, 0)});
+		FCRecipes.AddShapelessRecipe(new ItemStack(Item.flowerPot, 1), new ItemStack[]{new ItemStack(FCBetterThanWolves.fcItemPileDirt), new ItemStack(FCBetterThanWolves.fcUrn)});
+		for (int i = 0; i < 16; ++i)
+			FCRecipes.AddShapelessRecipe(new ItemStack(Block.cloth, 1, BlockCloth.getDyeFromBlock(i)), new Object[] {new ItemStack(Item.dyePowder, 1, i+16), new ItemStack(Item.itemsList[Block.cloth.blockID], 1, 0)});
 		
 		//Fertilizer
-		FCRecipes.AddShapelessVanillaRecipe(new ItemStack(fertilizer, 2), new ItemStack[] { new ItemStack(Item.dyePowder, 1, 15), new ItemStack(FCBetterThanWolves.fcDung) });
+		FCRecipes.AddShapelessRecipe(new ItemStack(fertilizer, 2), new ItemStack[] { new ItemStack(Item.dyePowder, 1, 15), new ItemStack(FCBetterThanWolves.fcDung) });
 
 		//Flower Recipes
 
@@ -90,27 +90,27 @@ public class Addon_Flowers
 		//Cooking with dyes
 		for (int Index = 0; Index < 16; Index++)
 		{
-			FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Block.cloth,1,BlockCloth.getDyeFromBlock(Index)),
+			FCRecipes.AddShapelessRecipe(new ItemStack(Block.cloth,1,BlockCloth.getDyeFromBlock(Index)),
 				new Object[]{new ItemStack(Item.dyePowder,1,Index+16),new ItemStack(Item.itemsList[Block.cloth.blockID], 1,0)});
-			//FCRecipes.AddVanillaRecipe(new ItemStack(stainedGlassPane, 16, Index), new Object[] { "GGG", "GGG", 'G', new ItemStack(stainedGlass, 1, Index) });
+			//FCRecipes.AddRecipe(new ItemStack(stainedGlassPane, 16, Index), new Object[] { "GGG", "GGG", 'G', new ItemStack(stainedGlass, 1, Index) });
 			//FCRecipes.AddStokedCrucibleRecipe(new ItemStack(stainedGlass, 3, Index), new ItemStack[] { new ItemStack(stainedGlassPane, 8, Index) });
 		}
 		//Mixing dyes
-		FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.dyePowder, 2, 10), new Object[] {new ItemStack(Item.dyePowder, 1, 2), new ItemStack(Item.dyePowder, 1, 31)});
-		FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.dyePowder, 2, 8), new Object[] {new ItemStack(Item.dyePowder, 1, 0), new ItemStack(Item.dyePowder, 1, 31)});
-		FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.dyePowder, 2, 7), new Object[] {new ItemStack(Item.dyePowder, 1, 8), new ItemStack(Item.dyePowder, 1, 31)});
-		FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.dyePowder, 2, 9), new Object[] {new ItemStack(Item.dyePowder, 1, 1), new ItemStack(Item.dyePowder, 1, 31)});
-		FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.dyePowder, 2, 6), new Object[] {new ItemStack(Item.dyePowder, 1, 20), new ItemStack(Item.dyePowder, 1, 2)});
-		FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.dyePowder, 2, 5), new Object[] {new ItemStack(Item.dyePowder, 1, 20), new ItemStack(Item.dyePowder, 1, 1)});
-		FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.dyePowder, 3, 13), new Object[] {new ItemStack(Item.dyePowder, 1, 20), new ItemStack(Item.dyePowder, 1, 1), new ItemStack(Item.dyePowder, 1, 9)});
-		FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.dyePowder, 2, 12), new Object[] {new ItemStack(Item.dyePowder, 1, 20), new ItemStack(Item.dyePowder, 1, 15)});
-		FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.dyePowder, 2, 12), new Object[] {new ItemStack(Item.dyePowder, 1, 20), new ItemStack(Item.dyePowder, 1, 31)});
-		FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.dyePowder, 2, 12), new Object[] {new ItemStack(Item.dyePowder, 1, 4), new ItemStack(Item.dyePowder, 1, 15)});
-		FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.dyePowder, 3, 7), new Object[] {new ItemStack(Item.dyePowder, 1, 0), new ItemStack(Item.dyePowder, 1, 31), new ItemStack(Item.dyePowder, 1, 15)});
-		FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.dyePowder, 3, 7), new Object[] {new ItemStack(Item.dyePowder, 1, 0), new ItemStack(Item.dyePowder, 1, 31), new ItemStack(Item.dyePowder, 1, 31)});
-		FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.dyePowder, 4, 13), new Object[] {new ItemStack(Item.dyePowder, 1, 20), new ItemStack(Item.dyePowder, 1, 1), new ItemStack(Item.dyePowder, 1, 1), new ItemStack(Item.dyePowder, 1, 15)});
-		FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.dyePowder, 4, 13), new Object[] {new ItemStack(Item.dyePowder, 1, 20), new ItemStack(Item.dyePowder, 1, 1), new ItemStack(Item.dyePowder, 1, 1), new ItemStack(Item.dyePowder, 1, 31)});
-		FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.dyePowder, 4, 13), new Object[] {new ItemStack(Item.dyePowder, 1, 4), new ItemStack(Item.dyePowder, 1, 1), new ItemStack(Item.dyePowder, 1, 1), new ItemStack(Item.dyePowder, 1, 31)});
+		FCRecipes.AddShapelessRecipe(new ItemStack(Item.dyePowder, 2, 10), new Object[] {new ItemStack(Item.dyePowder, 1, 2), new ItemStack(Item.dyePowder, 1, 31)});
+		FCRecipes.AddShapelessRecipe(new ItemStack(Item.dyePowder, 2, 8), new Object[] {new ItemStack(Item.dyePowder, 1, 0), new ItemStack(Item.dyePowder, 1, 31)});
+		FCRecipes.AddShapelessRecipe(new ItemStack(Item.dyePowder, 2, 7), new Object[] {new ItemStack(Item.dyePowder, 1, 8), new ItemStack(Item.dyePowder, 1, 31)});
+		FCRecipes.AddShapelessRecipe(new ItemStack(Item.dyePowder, 2, 9), new Object[] {new ItemStack(Item.dyePowder, 1, 1), new ItemStack(Item.dyePowder, 1, 31)});
+		FCRecipes.AddShapelessRecipe(new ItemStack(Item.dyePowder, 2, 6), new Object[] {new ItemStack(Item.dyePowder, 1, 20), new ItemStack(Item.dyePowder, 1, 2)});
+		FCRecipes.AddShapelessRecipe(new ItemStack(Item.dyePowder, 2, 5), new Object[] {new ItemStack(Item.dyePowder, 1, 20), new ItemStack(Item.dyePowder, 1, 1)});
+		FCRecipes.AddShapelessRecipe(new ItemStack(Item.dyePowder, 3, 13), new Object[] {new ItemStack(Item.dyePowder, 1, 20), new ItemStack(Item.dyePowder, 1, 1), new ItemStack(Item.dyePowder, 1, 9)});
+		FCRecipes.AddShapelessRecipe(new ItemStack(Item.dyePowder, 2, 12), new Object[] {new ItemStack(Item.dyePowder, 1, 20), new ItemStack(Item.dyePowder, 1, 15)});
+		FCRecipes.AddShapelessRecipe(new ItemStack(Item.dyePowder, 2, 12), new Object[] {new ItemStack(Item.dyePowder, 1, 20), new ItemStack(Item.dyePowder, 1, 31)});
+		FCRecipes.AddShapelessRecipe(new ItemStack(Item.dyePowder, 2, 12), new Object[] {new ItemStack(Item.dyePowder, 1, 4), new ItemStack(Item.dyePowder, 1, 15)});
+		FCRecipes.AddShapelessRecipe(new ItemStack(Item.dyePowder, 3, 7), new Object[] {new ItemStack(Item.dyePowder, 1, 0), new ItemStack(Item.dyePowder, 1, 31), new ItemStack(Item.dyePowder, 1, 15)});
+		FCRecipes.AddShapelessRecipe(new ItemStack(Item.dyePowder, 3, 7), new Object[] {new ItemStack(Item.dyePowder, 1, 0), new ItemStack(Item.dyePowder, 1, 31), new ItemStack(Item.dyePowder, 1, 31)});
+		FCRecipes.AddShapelessRecipe(new ItemStack(Item.dyePowder, 4, 13), new Object[] {new ItemStack(Item.dyePowder, 1, 20), new ItemStack(Item.dyePowder, 1, 1), new ItemStack(Item.dyePowder, 1, 1), new ItemStack(Item.dyePowder, 1, 15)});
+		FCRecipes.AddShapelessRecipe(new ItemStack(Item.dyePowder, 4, 13), new Object[] {new ItemStack(Item.dyePowder, 1, 20), new ItemStack(Item.dyePowder, 1, 1), new ItemStack(Item.dyePowder, 1, 1), new ItemStack(Item.dyePowder, 1, 31)});
+		FCRecipes.AddShapelessRecipe(new ItemStack(Item.dyePowder, 4, 13), new Object[] {new ItemStack(Item.dyePowder, 1, 4), new ItemStack(Item.dyePowder, 1, 1), new ItemStack(Item.dyePowder, 1, 1), new ItemStack(Item.dyePowder, 1, 31)});
 	}
 	public static class BlockFlowers extends BlockFlower
 	{
@@ -132,24 +132,24 @@ public class Addon_Flowers
 			setCreativeTab(CreativeTabs.tabDecorations);
 			AddonManager.Register(this, Names, PreTitle, Titles, PostTitle);
 		}
-		public boolean canBlockStay(World par1World, int par2, int par3, int par4)
+		@Override public boolean canBlockStay(World par1World, int par2, int par3, int par4)
 		{
 			return Block.plantRed.canBlockStay(par1World, par2, par3, par4);
 		}
-		public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
+		@Override public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
 		{
 			return Block.plantRed.canPlaceBlockAt(par1World, par2, par3, par4);
 		}
-		public int damageDropped(int Meta)
+		@Override public int damageDropped(int Meta)
 		{
 			return Meta;
 		}
 //CLIENT ONLY METHODS
-		public Icon getIcon(int Side, int Meta)
+		@Override public Icon getIcon(int Side, int Meta)
 		{
 			return Icons[Meta];
 		}
-		public void registerIcons(IconRegister Register)
+		@Override public void registerIcons(IconRegister Register)
 		{
 			for (int Index = 0; Index < Icons.length; Index++)
 			{
@@ -172,7 +172,7 @@ public class Addon_Flowers
 			AddonManager.Name(new ItemStack(this, 1, 20), "Blue Dye");
 			AddonManager.Name(new ItemStack(this, 1, 31), "White Dye");
 		}
-		public boolean onItemUse(ItemStack var1, EntityPlayer var2, World var3, int var4, int var5, int var6, int var7, float var8, float var9, float var10)
+		@Override public boolean onItemUse(ItemStack var1, EntityPlayer var2, World var3, int var4, int var5, int var6, int var7, float var8, float var9, float var10)
 		{
 			return var2 != null && !var2.canPlayerEdit(var4, var5, var6, var7, var1) ?
 				false :(var1.getItemDamage() == 15 ?
@@ -242,11 +242,12 @@ public class Addon_Flowers
 			if (Block.tallGrass.canBlockStay(CurrentWorld, X, Y + 1, Z) && CurrentWorld.isAirBlock(X, Y + 1, Z))
 			CurrentWorld.setBlockAndMetadataWithNotify(X, Y + 1, Z, Block.tallGrass.blockID, 1);
 		}
-		public String getUnlocalizedName(ItemStack I)
+		@Override public String getUnlocalizedName(ItemStack I)
 		{
 			return super.getUnlocalizedName() + "." + ColorPlus_dyeColorNames[I.getItemDamage()&31];
 		}
-		public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List)
+//CLIENT ONLY METHODS
+		@Override public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List)
 		{
 			for (int var4 = 0; var4 < 16; ++var4)
 			{
@@ -255,12 +256,11 @@ public class Addon_Flowers
 			par3List.add(new ItemStack(par1, 1, 20));
 			par3List.add(new ItemStack(par1, 1, 31));
 		}
-//CLIENT ONLY METHODS
-		public Icon getIconFromDamage(int Meta)
+		@Override public Icon getIconFromDamage(int Meta)
 		{
 			return Meta>15 ? ExtraIcons[Meta-16] : super.getIconFromDamage(Meta);
 		}
-		public void registerIcons(IconRegister var1)
+		@Override public void registerIcons(IconRegister var1)
 		{
 			super.registerIcons(var1);
 			int I=0;
@@ -283,7 +283,7 @@ public class Addon_Flowers
 			SetBellowsBlowDistance(FCBetterThanWolves.fcCoalDust.GetBellowsBlowDistance(0));
 			AddonManager.Name(this, "Fertilizer");
 		}
-		public boolean onItemUse(ItemStack var1, EntityPlayer var2, World var3, int var4, int var5, int var6, int var7, float var8, float var9, float var10)
+		@Override public boolean onItemUse(ItemStack var1, EntityPlayer var2, World var3, int var4, int var5, int var6, int var7, float var8, float var9, float var10)
 		{
 			return var2 != null && !var2.canPlayerEdit(var4, var5, var6, var7, var1) ? false : this.ApplyBoneMeal(var1, var2, var3, var4, var5, var6, var7, var8, var9, var10);
 		}
@@ -407,7 +407,7 @@ public class Addon_Flowers
 			setCreativeTab(CreativeTabs.tabDecorations);
 		}
 
-		public void updateTick(World CurrentWorld, int X, int Y, int Z, Random itemRand)
+		@Override public void updateTick(World CurrentWorld, int X, int Y, int Z, Random itemRand)
 		{
 			int var6 = this.GetPlanterType(CurrentWorld, X, Y, Z);
 
@@ -500,7 +500,7 @@ public class Addon_Flowers
 		/**
 		* Used to check if a recipe matches current crafting inventory
 		*/
-		public boolean matches(InventoryCrafting par1InventoryCrafting, World par2World)
+		@Override public boolean matches(InventoryCrafting par1InventoryCrafting, World par2World)
 		{
 			this.field_92102_a = null;
 			int var3 = 0;
@@ -722,10 +722,15 @@ public class Addon_Flowers
 			}
 		}
 
+		@Override public boolean HasSecondaryOutput()
+		{
+			return false;
+		}
+
 		/**
 		* Returns an Item that is the result of this recipe
 		*/
-		public ItemStack getCraftingResult(InventoryCrafting par1InventoryCrafting)
+		@Override public ItemStack getCraftingResult(InventoryCrafting par1InventoryCrafting)
 		{
 			return this.field_92102_a.copy();
 		}
@@ -733,17 +738,17 @@ public class Addon_Flowers
 		/**
 		* Returns the size of the recipe area
 		*/
-		public int getRecipeSize()
+		@Override public int getRecipeSize()
 		{
 			return 10;
 		}
 
-		public ItemStack getRecipeOutput()
+		@Override public ItemStack getRecipeOutput()
 		{
 			return this.field_92102_a;
 		}
 
-		public boolean matches(IRecipe var1)
+		@Override public boolean matches(IRecipe var1)
 		{
 			return false;
 		}
