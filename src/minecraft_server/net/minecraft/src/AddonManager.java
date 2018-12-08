@@ -16,7 +16,7 @@ import net.minecraft.server.MinecraftServer;
 
 public class AddonManager extends FCAddOn
 {
-	public static final boolean DEBUG_ADDON_LOAD = true;
+	public static final boolean DEBUG_ADDON_LOAD = false;
 
 	public static final int
 		id_paperWall=3000,
@@ -56,7 +56,7 @@ public class AddonManager extends FCAddOn
 	private static ArrayList<String> Names = new ArrayList<String>();
 	private static ArrayList<Object> NameTargets = new ArrayList<Object>();
 	private static ArrayList<String> loadedAddons = new ArrayList<String>();
-	
+
 	public void Initialize()
 	{
 		System.out.println("[INFO] AddonManager: Initialize");
@@ -66,7 +66,7 @@ public class AddonManager extends FCAddOn
 		System.out.println("[INFO] AddonManager: PostInitialize");
 		try
 		{
-			File file = new File(new File("."), "addonconfig.txt");
+			File file = new File("addonconfig.txt");
 			FileInputStream fis = new FileInputStream(file);
 			byte[] data = new byte[(int) file.length()];
 			fis.read(data);
@@ -107,108 +107,108 @@ public class AddonManager extends FCAddOn
 			Index++;
 		}
 	}
-	public static void Name(Object Target, String Name)
+	public static void Name(Object target, String name)
 	{
-		Names.add(Name);
-		NameTargets.add(Target);
+		Names.add(name);
+		NameTargets.add(target);
 	}
-	public static void NameSubBlocks(Block SidingAndCorner, Block MouldingAndDecorative, String Name)
+	public static void NameSubBlocks(Block sidingAndCorner, Block mouldingAndDecorative, String name)
 	{
 
-		Name(SidingAndCorner, "Siding And Corner");
-		Name(MouldingAndDecorative, "Moulding And Decorative");
+		Name(sidingAndCorner, "Siding And Corner");
+		Name(mouldingAndDecorative, "Moulding And Decorative");
 
-		String Tag = SidingAndCorner.getUnlocalizedName();
-		Name(Tag + ".siding" + ".name", Name + " Siding");
-		Name(Tag + ".corner" + ".name", Name + " Corner");
-		Name(Tag + ".bench" + ".name", Name + " Bench");
-		Name(Tag + ".fence" + ".name", Name + " Fence");
+		String tag = sidingAndCorner.getUnlocalizedName();
+		Name(tag + ".siding" + ".name", name + " Siding");
+		Name(tag + ".corner" + ".name", name + " Corner");
+		Name(tag + ".bench" + ".name", name + " Bench");
+		Name(tag + ".fence" + ".name", name + " Fence");
 
-		Tag = MouldingAndDecorative.getUnlocalizedName();
-		Name(Tag + ".moulding" + ".name", Name + " Moulding");
-		Name(Tag + ".column" + ".name", Name + " Column");
-		Name(Tag + ".pedestal" + ".name", Name + " Pedestal");
-		Name(Tag + ".table" + ".name", Name + " Table");
+		tag = mouldingAndDecorative.getUnlocalizedName();
+		Name(tag + ".moulding" + ".name", name + " Moulding");
+		Name(tag + ".column" + ".name", name + " Column");
+		Name(tag + ".pedestal" + ".name", name + " Pedestal");
+		Name(tag + ".table" + ".name", name + " Table");
 	}
-	public static void NameSubBlocks_Wall(Block SidingAndCorner, Block MouldingAndDecorative, String Name)
+	public static void NameSubBlocks_Wall(Block sidingAndCorner, Block mouldingAndDecorative, String name)
 	{
 
-		Name(SidingAndCorner, "Siding And Corner");
-		Name(MouldingAndDecorative, "Moulding And Decorative");
+		Name(sidingAndCorner, "Siding And Corner");
+		Name(mouldingAndDecorative, "Moulding And Decorative");
 
-		String Tag = SidingAndCorner.getUnlocalizedName();
-		Name(Tag + ".siding" + ".name", Name + " Siding");
-		Name(Tag + ".corner" + ".name", Name + " Corner");
-		Name(Tag + ".bench" + ".name", Name + " Bench");
-		Name(Tag + ".fence" + ".name", Name + " Wall");
+		String tag = sidingAndCorner.getUnlocalizedName();
+		Name(tag + ".siding" + ".name", name + " Siding");
+		Name(tag + ".corner" + ".name", name + " Corner");
+		Name(tag + ".bench" + ".name", name + " Bench");
+		Name(tag + ".fence" + ".name", name + " Wall");
 
-		Tag = MouldingAndDecorative.getUnlocalizedName();
-		Name(Tag + ".moulding" + ".name", Name + " Moulding");
-		Name(Tag + ".column" + ".name", Name + " Column");
-		Name(Tag + ".pedestal" + ".name", Name + " Pedestal");
-		Name(Tag + ".table" + ".name", Name + " Table");
+		tag = mouldingAndDecorative.getUnlocalizedName();
+		Name(tag + ".moulding" + ".name", name + " Moulding");
+		Name(tag + ".column" + ".name", name + " Column");
+		Name(tag + ".pedestal" + ".name", name + " Pedestal");
+		Name(tag + ".table" + ".name", name + " Table");
 	}
-	public static int ReplaceBlockID(Block Victim)
+	public static int ReplaceBlockID(Block block)
 	{
-		Block.blocksList[Victim.blockID] = null;
-		return Victim.blockID;
+		Block.blocksList[block.blockID] = null;
+		return block.blockID;
 	}
-	public static void MakeStorage(Item SubItem, Block Container)
+	public static void MakeStorage(Item subItem, Block container)
 	{
-		FCRecipes.AddRecipe(new ItemStack(Container), new Object[]{"XXX","XXX","XXX",'X',SubItem});
-		FCRecipes.AddShapelessRecipe(new ItemStack(SubItem, 9), new ItemStack[]{new ItemStack(Container)});
+		FCRecipes.AddRecipe(new ItemStack(container), new Object[]{"XXX","XXX","XXX",'X',subItem});
+		FCRecipes.AddShapelessRecipe(new ItemStack(subItem, 9), new ItemStack[]{new ItemStack(container)});
 	}
-	public static void MakeStorage(Item SubItem, Item Container)
+	public static void MakeStorage(Item subItem, Item container)
 	{
-		FCRecipes.AddRecipe(new ItemStack(Container), new Object[]{"XXX","XXX","XXX",'X',SubItem});
-		FCRecipes.AddShapelessRecipe(new ItemStack(SubItem, 9), new ItemStack[]{new ItemStack(Container)});
+		FCRecipes.AddRecipe(new ItemStack(container), new Object[]{"XXX","XXX","XXX",'X',subItem});
+		FCRecipes.AddShapelessRecipe(new ItemStack(subItem, 9), new ItemStack[]{new ItemStack(container)});
 	}
-	public static void MakeStorage(ItemStack SubItem, ItemStack Container)
+	public static void MakeStorage(ItemStack subItem, ItemStack container)
 	{
-		FCRecipes.AddRecipe(Container, new Object[]{"XXX","XXX","XXX",'X',SubItem});
-		FCRecipes.AddShapelessRecipe(new ItemStack(SubItem.itemID, 9,SubItem.getItemDamage()), new ItemStack[]{Container});
+		FCRecipes.AddRecipe(container, new Object[]{"XXX","XXX","XXX",'X',subItem});
+		FCRecipes.AddShapelessRecipe(new ItemStack(subItem.itemID, 9,subItem.getItemDamage()), new ItemStack[]{container});
 	}
-	public static void Register(Block Target)
+	public static void Register(Block target)
 	{
-		Item.itemsList[Target.blockID] = new ItemBlock(Target.blockID - 256);
+		Item.itemsList[target.blockID] = new ItemBlock(target.blockID - 256);
 	}
-	public static void Register(Block Target, String Name)
+	public static void Register(Block target, String name)
 	{
-		Register(Target);
-		Name(Target, Name);
+		Register(target);
+		Name(target, name);
 	}
-	public static void Register(Block Target, String[] Names, String PreTitle, String[] Titles, String PostTitle)
+	public static void Register(Block target, String[] names, String preTitle, String[] titles, String postTitle)
 	{
-		Item.itemsList[Target.blockID] = new ItemMultiBlock(Target, Names, PreTitle, Titles, PostTitle);
+		Item.itemsList[target.blockID] = new ItemMultiBlock(target, names, preTitle, titles, postTitle);
 	}
-	public static void Register(Block Target, String[] Names, String[] Titles)
+	public static void Register(Block target, String[] names, String[] titles)
 	{
-		Item.itemsList[Target.blockID] = new ItemMultiBlock(Target, Names, "", Titles, "");
+		Item.itemsList[target.blockID] = new ItemMultiBlock(target, names, "", titles, "");
 	}
-	public static void Register(Block Target, String[] Names, String[] Titles, String PostTitle)
+	public static void Register(Block target, String[] names, String[] titles, String postTitle)
 	{
-		Item.itemsList[Target.blockID] = new ItemMultiBlock(Target, Names, "", Titles, PostTitle);
+		Item.itemsList[target.blockID] = new ItemMultiBlock(target, names, "", titles, postTitle);
 	}
-	public static void Register(Block Target, String[] Names, String PreTitle, String[] Titles)
+	public static void Register(Block target, String[] names, String preTitle, String[] titles)
 	{
-		Item.itemsList[Target.blockID] = new ItemMultiBlock(Target, Names, PreTitle, Titles, "");
+		Item.itemsList[target.blockID] = new ItemMultiBlock(target, names, preTitle, titles, "");
 	}
 	public static class ItemMultiBlock extends ItemBlockWithMetadata
 	{
 		String[] blockNames;
-		ItemMultiBlock(Block Owner, String[] Names, String PreTitle, String[] Titles, String PostTitle)
+		ItemMultiBlock(Block owner, String[] names, String preTitle, String[] titles, String postTitle)
 		{
-			super(Owner.blockID - 256,Owner);
+			super(owner.blockID - 256,owner);
 			setMaxDamage(0);
 			setHasSubtypes(true);
-			setUnlocalizedName(Owner.getUnlocalizedName());
-			blockNames = Names;
-			for (int Index = 0; Index < Titles.length; ++Index)
-			Name(new ItemStack(this, 1, Index), PreTitle + Titles[Index] + PostTitle);
+			setUnlocalizedName(owner.getUnlocalizedName());
+			blockNames = names;
+			for (int i = 0; i < titles.length; ++i)
+				Name(new ItemStack(this, 1, i), preTitle + titles[i] + postTitle);
 		}
-		public String getUnlocalizedName(ItemStack Reference)
+		public String getUnlocalizedName(ItemStack reference)
 		{
-			return super.getUnlocalizedName() + "." + this.blockNames[Reference.getItemDamage()];
+			return super.getUnlocalizedName() + "." + this.blockNames[reference.getItemDamage()];
 		}
 		public void getSubItems(int var1, CreativeTabs var2, List var3)
 		{
@@ -216,75 +216,70 @@ public class AddonManager extends FCAddOn
 				var3.add(new ItemStack(this, 1, var4));
 		}
 	}
-	private static Map<String, Object> GetConfigInfo(String AddonName)
+	private static Map<String, Object> GetConfigInfo(String addonName)
 	{
-		File ConfigFile = new File(new File("."),AddonName+"Config.txt");
-		Map<String,Object>Return=new HashMap<String,Object>();
+		File configFile = new File(new File("."),addonName+"Config.txt");
+		Map<String,Object>results = new HashMap<String,Object>();
 		try
 		{
-			BufferedReader Reader=new BufferedReader(new FileReader(ConfigFile));
-			String Line="";
-			while((Line=Reader.readLine())!=null)
+			BufferedReader reader=new BufferedReader(new FileReader(configFile));
+			String line="";
+			while((line=reader.readLine())!=null)
 			{
-				String[]SplitLine=Line.split("=");
-				for (int Index=0;Index<SplitLine.length;++Index)
-				SplitLine[Index]=SplitLine[Index].trim();
-				Return.put(SplitLine[0],(SplitLine[1]=="1"||SplitLine[1]=="0")?SplitLine[1]=="1":SplitLine[1]);
+				String[]splitLine=line.split("=");
+				for (int i=0;i<splitLine.length;++i)
+				splitLine[i]=splitLine[i].trim();
+				results.put(splitLine[0],(splitLine[1]=="1"||splitLine[1]=="0")?splitLine[1]=="1":splitLine[1]);
 			}
-			Reader.close();
+			reader.close();
 		}
-		catch(Exception X)
+		catch(Exception x)
 		{
-			X.printStackTrace();
+			x.printStackTrace();
 		}
-		return Return;
+		return results;
 	}
-	private static void WriteToConfigFile(String AddonName, Map<String, Object> Contents)
+	private static void WriteToConfigFile(String addonName, Map<String, Object> contents)
 	{
-		File ConfigFile = new File(new File("."),AddonName+"Config.txt");
-		PrintWriter Writer;
+		File configFile = new File(new File("."),addonName+"Config.txt");
+		PrintWriter writer;
 		try
 		{
-			Writer = new PrintWriter(ConfigFile);
+			writer = new PrintWriter(configFile);
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
 			return;
 		}
-		for(String CurrentKey:Contents.keySet())
+		for(String currentKey:contents.keySet())
 		{
-			Object Value=Contents.get(CurrentKey);
-			Writer.println(CurrentKey+"="+((Value instanceof Boolean)?((Boolean)Value==true?"1":"0"):Value.toString()));
+			Object value=contents.get(currentKey);
+			writer.println(currentKey+"="+((value instanceof Boolean)?((Boolean)value==true?"1":"0"):value.toString()));
 		}
-		Writer.close();
+		writer.close();
 	}
-	public static Map<String, Object> GetConfigInfo(String AddonName, Map<String, Object> Default)
+	public static Map<String, Object> GetConfigInfo(String addonName, Map<String, Object> defaultConfig)
 	{
-		File ConfigFile = new File(new File("."),AddonName+"Config.txt");
-		if(!ConfigFile.exists())
+		File configFile = new File(new File("."),addonName+"Config.txt");
+		if(!configFile.exists())
 		{
-			WriteToConfigFile(AddonName, Default);
-			return Default;
+			WriteToConfigFile(addonName, defaultConfig);
+			return defaultConfig;
 		}
-		Map<String,Object>CurrentConfigInfo=GetConfigInfo(AddonName),NewConfigInfo=Default;
+		Map<String,Object>currentConfig=GetConfigInfo(addonName),newConfig=defaultConfig;
 		boolean NeedsRewrite = false;
-		for(String CurrentKey:Default.keySet())
+		for(String currentKey:defaultConfig.keySet())
 		{
-			if(CurrentConfigInfo.containsKey(CurrentKey))
-			NewConfigInfo.put(CurrentKey, CurrentConfigInfo.get(CurrentKey));
+			if(currentConfig.containsKey(currentKey))
+			newConfig.put(currentKey, currentConfig.get(currentKey));
 			else
 			NeedsRewrite=true;
 		}
 		if(NeedsRewrite)
-		WriteToConfigFile(AddonName, CurrentConfigInfo);
-		return NewConfigInfo;
+		WriteToConfigFile(addonName, currentConfig);
+		return newConfig;
 	}
-	public static int ToInt(boolean Victim)
-	{
-		return Victim?1:0;
-	}
-	
 	public static boolean require(String name)
 	{
 		//The original way I wrote this method was stupid and did not make sense.
@@ -332,14 +327,33 @@ public class AddonManager extends FCAddOn
 	}
 	public static class FCBlockSidingAndCornerAndDecorative_Wall extends FCBlockSidingAndCornerAndDecorative
 	{
-
-		public FCBlockSidingAndCornerAndDecorative_Wall(int var1, Material var2, String var3, float var4, float var5, StepSound var6, String var7, String OriginalName)
+		static ArrayList<FCBlockSidingAndCornerAndDecorative_Wall> wallBlocks = new ArrayList<FCBlockSidingAndCornerAndDecorative_Wall>();
+		public FCBlockSidingAndCornerAndDecorative_Wall(int var1, Material var2, String var3, float var4, float var5, StepSound var6, String var7, String originalName)
 		{
 			super(var1, var2, var3, var4, var5, var6, var7);
 			setCreativeTab(CreativeTabs.tabDecorations);
-			AddonManager.Name(getUnlocalizedName() + ".fence" + ".name", OriginalName + " Wall");
+			AddonManager.Name(getUnlocalizedName() + ".fence" + ".name", originalName + " Wall");
+			wallBlocks.add(this);
 		}
-		public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+		@Override public boolean DoesFenceConnectTo(IBlockAccess var1, int var2, int var3, int var4)
+		{
+			int var5 = var1.getBlockId(var2, var3, var4);
+			if(Block.blocksList[var5] instanceof FCBlockSidingAndCornerAndDecorative_Wall && 14 == var1.getBlockMetadata(var2, var3, var4))
+			{
+				return true;
+			}
+
+			if ((var5 != this.blockID || var1.getBlockMetadata(var2, var3, var4) != 14) && var5 != Block.fenceGate.blockID)
+			{
+				Block var6 = Block.blocksList[var5];
+				return var6 != null && var6.blockMaterial.isOpaque() && var6.renderAsNormalBlock() && var6.blockMaterial != Material.pumpkin;
+			}
+			else
+			{
+				return true;
+			}
+		}
+		@Override public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
 		{
 			if(par1IBlockAccess.getBlockMetadata(par2,par3,par4) != 14)
 			{
@@ -393,9 +407,7 @@ public class AddonManager extends FCAddOn
 			this.setBlockBounds(var9, 0.0F, var11, var10, var13, var12);
 		}
 	}
-	
-	public static void serverCustomPacketReceived(MinecraftServer ms, EntityPlayerMP epmp,
-			Packet250CustomPayload packet) {
+	public static void serverCustomPacketReceived(MinecraftServer ms, EntityPlayerMP epmp, Packet250CustomPayload packet) {
 		try {
 			DataInputStream dis = new DataInputStream(new ByteArrayInputStream(packet.data));
 

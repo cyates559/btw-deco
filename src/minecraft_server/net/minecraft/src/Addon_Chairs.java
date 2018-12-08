@@ -15,81 +15,81 @@ public class Addon_Chairs
 	}
 	public static class BlockChairWood extends BlockChair
 	{
-		public BlockChairWood(int ID, String WoodType, String WoodName)
+		public BlockChairWood(int id, String woodType, String woodName)
 		{
-			super(ID, Material.wood, WoodType + "wood", WoodName + " Wood");
+			super(id, Material.wood, woodType + "wood", woodName + " Wood");
 			this.SetAxesEffectiveOn( true );
-			setStepSound(soundWoodFootstep);
+			this.setStepSound(soundWoodFootstep);
 		}
 	}
 	public static class BlockChairStone extends BlockChair
 	{
-		public BlockChairStone(int ID, String tag, String name)
+		public BlockChairStone(int id, String tag, String name)
 		{
-			super(ID, Material.rock, tag, name);
+			super(id, Material.rock, tag, name);
 			this.SetAxesEffectiveOn(true);
-			setStepSound(soundStoneFootstep);
+			this.setStepSound(soundStoneFootstep);
 		}
 	}
 	public static class BlockChair extends Block
 	{
-		public BlockChair(int ID, Material MyMaterial, String Tag, String Name)
+		public BlockChair(int id, Material material, String tag, String name)
 		{
-			super(ID, MyMaterial);
-			setUnlocalizedName("ginger_chair_" + Tag);
-			setCreativeTab(CreativeTabs.tabDecorations);
-			AddonManager.Register(this, Name + " Chair");
+			super(id, material);
+			this.setUnlocalizedName("ginger_chair_" + tag);
+			this.setCreativeTab(CreativeTabs.tabDecorations);
+			AddonManager.Register(this, name + " Chair");
 		}
-		public int GetFacing(IBlockAccess var1, int var2, int var3, int var4)
+		@Override public int GetFacing(IBlockAccess var1, int var2, int var3, int var4)
 		{
 			return var1.getBlockMetadata(var2, var3, var4);
 		}
-		public void SetFacing(World var1, int var2, int var3, int var4, int var5)
+		@Override public void SetFacing(World var1, int var2, int var3, int var4, int var5)
 		{
 			var1.setBlockMetadataWithNotify(var2, var3, var4, var5);
 		}
-		public int GetFacing(int Meta)
+		@Override public int GetFacing(int metadata)
 		{
-			return Meta;
+			return metadata;
 		}
-		public int SetFacing(int var1, int var2)
+		@Override public int SetFacing(int var1, int var2)
 		{
 			return var2;
 		}
-		public boolean CanRotateOnTurntable(IBlockAccess var1, int var2, int var3, int var4)
+		@Override public boolean CanRotateOnTurntable(IBlockAccess blockAccess, int x, int y, int z)
 		{
 			return true;
 		}
-		public boolean CanTransmitRotationHorizontallyOnTurntable(IBlockAccess var1, int var2, int var3, int var4)
+		@Override public boolean CanTransmitRotationHorizontallyOnTurntable(IBlockAccess blockAccess, int x, int y, int z)
 		{
 			return false;
 		}
-		public boolean CanTransmitRotationVerticallyOnTurntable(IBlockAccess var1, int var2, int var3, int var4)
+		@Override public boolean CanTransmitRotationVerticallyOnTurntable(IBlockAccess blockAccess, int x, int y, int z)
 		{
 			return false;
 		}
-		public boolean RotateAroundJAxis(World var1, int var2, int var3, int var4, boolean var5)
+		@Override public boolean RotateAroundJAxis(World world, int x, int y, int z, boolean var5)
 		{
-			return FCUtilsMisc.StandardRotateAroundJ(this, var1, var2, var3, var4, var5);
+			return FCUtilsMisc.StandardRotateAroundJ(this, world, x, y, z, var5);
 		}
-		public int RotateMetadataAroundJAxis(int var1, boolean var2)
+		@Override public int RotateMetadataAroundJAxis(int var1, boolean var2)
 		{
 			return FCUtilsMisc.StandardRotateMetadataAroundJ(this, var1, var2);
 		}
-		public boolean ToggleFacing(World var1, int var2, int var3, int var4, boolean var5)
+		@Override public boolean ToggleFacing(World world, int x, int y, int z, boolean var5)
 		{
-			this.RotateAroundJAxis(var1, var2, var3, var4, var5);
+			this.RotateAroundJAxis(world, x, y, z, var5);
 			return true;
 		}
-		public boolean isOpaqueCube()
+		@Override public boolean isOpaqueCube()
 		{
 			return false;
 		}
-		public boolean renderAsNormalBlock()
+		@Override public boolean renderAsNormalBlock()
 		{
 			return false;
 		}
-		public int onBlockPlaced(World var1, int var2, int var3, int var4, int var5, float var6, float var7, float var8, int var9)
+		@Override public int onBlockPlaced(World world, int var2, int var3, int var4, int var5, float var6, float var7, float var8, int var9)
 		{
 			if (var5 < 2)
 			{
@@ -100,24 +100,20 @@ public class Addon_Chairs
 			}
 			return SetFacing(var9, var5);
 		}
-		public void onBlockPlacedBy(World var1, int var2, int var3, int var4, EntityLiving var5, ItemStack var6)
+		@Override public void onBlockPlacedBy(World world, int var2, int var3, int var4, EntityLiving var5, ItemStack var6)
 		{
 			int var7 = FCUtilsMisc.ConvertPlacingEntityOrientationToBlockFacingReversed(var5);
-			this.SetFacing(var1, var2, var3, var4, var7);
+			this.SetFacing(world, var2, var3, var4, var7);
 			
 		}
-		public AxisAlignedBB getCollisionBoundingBoxFromPool(World var1, int var2, int var3, int var4)
+		@Override public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int var2, int var3, int var4)
 		{
-			int var5 = this.GetFacing(var1, var2, var3, var4);
+			int var5 = this.GetFacing(world, var2, var3, var4);
 			return var5 != 2 && var5 != 3 ? AxisAlignedBB.getAABBPool().getAABB((double) ((float) var2), (double) ((float) var3), (double) ((float) var4 + 0.5F - 0.25F), (double) ((float) var2 + 1.0F), (double) ((float) var3 + 1.0F), (double) ((float) var4 + 0.5F + 0.25F)) : AxisAlignedBB.getAABBPool().getAABB((double) ((float) var2 + 0.5F - 0.25F), (double) ((float) var3), (double) ((float) var4), (double) ((float) var2 + 0.5F + 0.25F), (double) ((float) var3 + 1.0F), (double) ((float) var4 + 1.0F));
 		}
-		public void setBlockBoundsBasedOnState(IBlockAccess var1, int var2, int var3, int var4)
+		@Override public void setBlockBoundsBasedOnState(IBlockAccess blockAccess, int var2, int var3, int var4)
 		{
 			setBlockBounds(.0625F, 0.0F, .0625F, .9375F, 1.25F, .9375F);
-		}
-		public boolean shouldSideBeRendered(IBlockAccess var1, int var2, int var3, int var4, int var5)
-		{
-			return true;
 		}
 	}
 }

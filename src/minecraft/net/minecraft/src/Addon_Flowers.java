@@ -116,7 +116,7 @@ public class Addon_Flowers
 	{
 
 //CLIENT ONLY
-		Icon[] Icons;
+		Icon[] icons;
 //
 		String TextureTag;
 		public BlockFlowers(int ID, String Texture, String[] Names, String[] Titles){this(ID,Texture, Names, "",Titles,"");}
@@ -126,7 +126,7 @@ public class Addon_Flowers
 		{
 			super(ID);
 			TextureTag = Texture;
-			Icons = new Icon[Names.length];
+			this.icons = new Icon[Names.length];
 			setUnlocalizedName("deco"+Texture);
 			setStepSound(soundGrassFootstep);
 			setCreativeTab(CreativeTabs.tabDecorations);
@@ -147,13 +147,13 @@ public class Addon_Flowers
 //CLIENT ONLY METHODS
 		@Override public Icon getIcon(int Side, int Meta)
 		{
-			return Icons[Meta];
+			return this.icons[Meta];
 		}
 		@Override public void registerIcons(IconRegister Register)
 		{
-			for (int Index = 0; Index < Icons.length; Index++)
+			for (int i = 0; i < icons.length; i++)
 			{
-				Icons[Index] = Register.registerIcon("ginger_"+TextureTag+"_" + Index);
+				this.icons[i] = Register.registerIcon("ginger_"+TextureTag+"_" + i);
 			}
 		}
 //
