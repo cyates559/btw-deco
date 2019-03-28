@@ -30,7 +30,7 @@ public class Addon_Lanterns
 		FCRecipes.AddStokedCrucibleRecipe(new ItemStack(Item.ingotIron, 1), new ItemStack[] { new ItemStack(fenceSteel, 1) });
 		FCRecipes.AddAnvilRecipe(new ItemStack(fenceSteel, 10), new Object[] { " X X", "XXXX", " X X", " X X", 'X', new ItemStack(Item.ingotIron) });
 		
-		FCRecipes.AddShapelessRecipe(new ItemStack(bottleHempOil,1), new Object[]{Item.glassBottle, FCBetterThanWolves.fcHempSeeds});
+		FCRecipes.AddShapelessRecipe(new ItemStack(bottleHempOil,1), new Object[]{Item.glassBottle, FCBetterThanWolves.fcItemHempSeeds});
 		FCRecipes.AddRecipe(new ItemStack(lanternPaper,1),new Object[]{"pwp","wcw","pwp",'c', new ItemStack(FCBetterThanWolves.fcItemCandle,1,32767), 'p', Item.paper, 'w', new ItemStack(FCBetterThanWolves.fcBlockWoodMouldingItemStubID, 1, 32767)});
 		FCRecipes.AddAnvilRecipe(new ItemStack(lanternGold,2), new Object[]{" ss "," gg ","cggc","cggc",'s',Block.stone,'g',Item.goldNugget,'c', new ItemStack(FCBetterThanWolves.fcItemCandle,1,32767)});
 		FCRecipes.AddRecipe(new ItemStack(lanternSteel,1),new Object[]{" s ","shs"," s ",'s',fenceSteel,'h',bottleHempOil});
@@ -89,12 +89,13 @@ public class Addon_Lanterns
 			super(ID, Material.iron);
 			setUnlocalizedName("ginger_lantern_gold");
 			setStepSound(soundStoneFootstep);
-			setBlockBounds(0F, 0F, 0F, 1F, 1F, 1F);
+			//setBlockBounds(0F, 0F, 0F, 1F, 1F, 1F);
 			setCreativeTab(CreativeTabs.tabDecorations);
 			setHardness(0.3F);
 			setLightValue(1F);
 			AddonManager.Register(this, "Chandelier");
 			this.SetPicksEffectiveOn(true);
+			this.InitBlockBounds(.3125D,	0.0D,	.3125D,		.6875D,		.5D,	.6875D);
 		}
 		@Override public boolean isOpaqueCube()
 		{
@@ -125,50 +126,55 @@ public class Addon_Lanterns
 			setLightValue(1F);
 			//setBlockBounds(.3125F, 0F, .3125F, .6875F, .5F, .6875F);
 			AddonManager.Register(this, name);
-			FCBlockAestheticNonOpaque_LightningRodFix.AddHoldableBlock(this);
+			//FCBlockAestheticNonOpaque_LightningRodFix.AddHoldableBlock(this);
+			this.InitBlockBounds(.3125D,	0.0D,	.3125D,		.6875D,		.5D,	.6875D);
 		}
 		@Override public int onBlockPlaced(World var1, int var2, int var3, int var4, int var5, float var6, float var7, float var8, int var9)
 		{
-			setBlockBoundsBasedOnState(var1, var2, var3,var4);
+			GetBlockBoundsFromPoolBasedOnState(var1, var2, var3, var4);
 			return SetFacing(var9, var5);
+		}
+		@Override public boolean isOpaqueCube()
+		{
+			return false;
 		}
 		@Override public boolean renderAsNormalBlock()
 		{
 			return false;
 		}
-		@Override public void setBlockBoundsBasedOnState(IBlockAccess Access, int X, int Y, int Z)
+
+		public AxisAlignedBB GetBlockBoundsFromPoolBasedOnState(IBlockAccess Access, int x, int y, int z)
 		{
-			switch (GetFacing(Access, X, Y, Z))
+			double[] bounds = new double[6];
+			double[] bounds0 = {.3125D,	.5D,	.3125D,		.6875D,		1D,		.6875D};
+			double[] bounds1 = {.3125D,	0.0D,	.3125D,		.6875D,		.5D,	.6875D};
+			double[] bounds2 = {.3125D,	0.0D,	.625D,		.6875D,		.5D,	1D};
+			double[] bounds3 = {.3125D,	0.0D,	0.0D,		.6875D,		.5D,	.375D};
+			double[] bounds4 = {.625D,	0.0D,	.3125D,		1D,			.5D,	.6875D};
+			double[] bounds5 = {0.0D,		0.0D,	.3125D,		.375D,		.5D,	.6875D};
+
+			switch (GetFacing(Access, x, y, z))
 			{
 				default:
-				case 0: setBlockBounds(.3125F,.5F,.3125F,.6875F,1F,.6875F); break;
-				case 1: setBlockBounds(.3125F,0F,.3125F,.6875F,.5F,.6875F); break;
-				case 2: setBlockBounds(.3125F,0F,.625F,.6875F,.5F,1F);   break;
-				case 3: setBlockBounds(.3125F,0F,0F,.6875F,.5F,.375F);   break;
-				case 4: setBlockBounds(.625F,0F,.3125F,1F,.5F,.6875F);   break;
-				case 5: setBlockBounds(0F,0F,.3125F,.375F,.5F,.6875F);   break;
+				case 0: bounds = bounds0;
+					break;
+				case 1: bounds = bounds1;
+					break;
+				case 2: bounds = bounds2;
+					break;
+				case 3: bounds = bounds3;
+					break;
+				case 4: bounds = bounds4;
+					break;
+				case 5: bounds = bounds5;
 			}
+
+			return AxisAlignedBB.getAABBPool().getAABB(bounds[0], bounds[1], bounds[2], bounds[3], bounds[4], bounds[5]);
 		}
-		@Override public AxisAlignedBB getCollisionBoundingBoxFromPool(World CurrentWorld, int X, int Y, int Z)
+
+		public AxisAlignedBB GetBlockBoundsFromPoolForItemRender()
 		{
-			switch (GetFacing(CurrentWorld, X, Y, Z))
-			{
-				default:
-				case 0: return AxisAlignedBB.getAABBPool().getAABB(X+.3125D,	Y+.5D,	Z+.3125D,	X+.6875D,	Y+1D,	Z+.6875D);
-				case 1: return AxisAlignedBB.getAABBPool().getAABB(X+.3125D,	Y,	Z+.3125D,	X+.6875D,	Y+.5D,	Z+.6875D);
-				case 2: return AxisAlignedBB.getAABBPool().getAABB(X+.3125D,	Y,	Z+.625D,	X+.6875D,	Y+.5D,	Z+1D);
-				case 3: return AxisAlignedBB.getAABBPool().getAABB(X+.3125D,	Y,	Z,		X+.6875D,	Y+.5D,	Z+.375D);
-				case 4: return AxisAlignedBB.getAABBPool().getAABB(X+.625D,	Y,	Z+.3125D,	X+1D,		Y+.5D,	Z+.6875D);
-				case 5: return AxisAlignedBB.getAABBPool().getAABB(X,		Y,	Z+.3125D,	X+.375D,	Y+.5D,	Z+.6875D);
-			}
-		}
-		@Override public void setBlockBoundsForItemRender()
-		{
-			setBlockBounds(.3125F, 0F, .3125F, .6875F, .5F, .6875F);
-		}
-		@Override public boolean isOpaqueCube()
-		{
-			return false;
+			return AxisAlignedBB.getAABBPool().getAABB(.3125D,	0.0D,	.3125D,		.6875D,		.5D,	.6875D);
 		}
 		@Override public int GetFacing(IBlockAccess var1, int var2, int var3, int var4)
 		{
