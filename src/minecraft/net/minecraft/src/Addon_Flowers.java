@@ -18,7 +18,7 @@ public class Addon_Flowers
 		Item.m_bSuppressConflictWarnings=true;
 		Item.dyePowder = new FCItemDye_ColorPlus(95);
 		Item.m_bSuppressConflictWarnings=false;
-		
+
 		List recipes = CraftingManager.getInstance().getRecipeList();
 		ArrayList<RecipeFireworks> fireworks = new ArrayList<RecipeFireworks>();
 		for(Object o: recipes)
@@ -28,23 +28,21 @@ public class Addon_Flowers
 			recipes.remove(rf);
 		recipes.add(new RecipeFireworks_Color());
 
-
 		FCBetterThanWolves.fcPlanter = new BlockPlanter(AddonManager.ReplaceBlockID(FCBetterThanWolves.fcPlanter));
 		flower = new BlockFlowers(3002, "flower",flowers,flowerNames);
 		tulip = new BlockFlowers(3006, "tulip", tulips, tulipNames, " Tulip");
-		
+
 		fertilizer = new ItemFertilizer(30003);
-		
 
 //recipes//
 		//Change flowerpot recipe
 		FCRecipes.RemoveVanillaRecipe(new ItemStack(Item.flowerPot, 1), new Object[] {"# #", " # ", '#', Item.brick});
-		FCRecipes.AddShapelessRecipe(new ItemStack(Item.flowerPot, 1), new ItemStack[]{new ItemStack(FCBetterThanWolves.fcItemPileDirt), new ItemStack(FCBetterThanWolves.fcUrn)});
+		FCRecipes.AddShapelessRecipe(new ItemStack(Item.flowerPot, 1), new ItemStack[]{new ItemStack(FCBetterThanWolves.fcItemPileDirt), new ItemStack(FCBetterThanWolves.fcItemUrn)});
 		for (int i = 0; i < 16; ++i)
 			FCRecipes.AddShapelessRecipe(new ItemStack(Block.cloth, 1, BlockCloth.getDyeFromBlock(i)), new Object[] {new ItemStack(Item.dyePowder, 1, i+16), new ItemStack(Item.itemsList[Block.cloth.blockID], 1, 0)});
-		
+
 		//Fertilizer
-		FCRecipes.AddShapelessRecipe(new ItemStack(fertilizer, 2), new ItemStack[] { new ItemStack(Item.dyePowder, 1, 15), new ItemStack(FCBetterThanWolves.fcDung) });
+		FCRecipes.AddShapelessRecipe(new ItemStack(fertilizer, 2), new ItemStack[] { new ItemStack(Item.dyePowder, 1, 15), new ItemStack(FCBetterThanWolves.fcItemDung) });
 
 		//Flower Recipes
 
@@ -86,7 +84,7 @@ public class Addon_Flowers
 		FCRecipes.AddMillStoneRecipe(new ItemStack[]{new ItemStack(Item.dyePowder, 2, 14)},	new ItemStack[]{new ItemStack(tulip, 1, 2)});
 		FCRecipes.AddMillStoneRecipe(new ItemStack[]{new ItemStack(Item.dyePowder, 2, 31)},	new ItemStack[]{new ItemStack(tulip, 1, 3)});
 		FCRecipes.AddMillStoneRecipe(new ItemStack[]{new ItemStack(Item.dyePowder, 2, 20)},	new ItemStack[]{new ItemStack(tulip, 1, 4)});
-		
+
 		//Cooking with dyes
 		for (int Index = 0; Index < 16; Index++)
 		{
@@ -114,7 +112,6 @@ public class Addon_Flowers
 	}
 	public static class BlockFlowers extends BlockFlower
 	{
-
 //CLIENT ONLY
 		Icon[] icons;
 //
@@ -272,7 +269,7 @@ public class Addon_Flowers
 		}
 //
 	}
-	
+
 	public static class ItemFertilizer extends Item
 	{
 		ItemFertilizer(int ID)
@@ -280,7 +277,7 @@ public class Addon_Flowers
 			super(ID);
 			setUnlocalizedName("ginger_fertilizer");
 			setCreativeTab(CreativeTabs.tabMaterials);
-			SetBellowsBlowDistance(FCBetterThanWolves.fcCoalDust.GetBellowsBlowDistance(0));
+			SetBellowsBlowDistance(FCBetterThanWolves.fcItemCoalDust.GetBellowsBlowDistance(0));
 			AddonManager.Name(this, "Fertilizer");
 		}
 		@Override public boolean onItemUse(ItemStack var1, EntityPlayer var2, World var3, int var4, int var5, int var6, int var7, float var8, float var9, float var10)

@@ -114,7 +114,6 @@ public class AddonManager extends FCAddOn
 	}
 	public static void NameSubBlocks(Block sidingAndCorner, Block mouldingAndDecorative, String name)
 	{
-
 		Name(sidingAndCorner, "Siding And Corner");
 		Name(mouldingAndDecorative, "Moulding And Decorative");
 
@@ -132,7 +131,6 @@ public class AddonManager extends FCAddOn
 	}
 	public static void NameSubBlocks_Wall(Block sidingAndCorner, Block mouldingAndDecorative, String name)
 	{
-
 		Name(sidingAndCorner, "Siding And Corner");
 		Name(mouldingAndDecorative, "Moulding And Decorative");
 
@@ -407,7 +405,6 @@ public class AddonManager extends FCAddOn
 			this.setBlockBounds(var9, 0.0F, var11, var10, var13, var12);
 		}
 
-
 //CLIENT ONLY
 		@Override public boolean RenderBlock(RenderBlocks var1, int var2, int var3, int var4)
 		{
@@ -500,7 +497,7 @@ public class AddonManager extends FCAddOn
 		}
 		//
 	}
-	
+
 	public static void serverCustomPacketReceived(MinecraftServer ms, EntityPlayerMP epmp, Packet250CustomPayload packet) {
 		try {
 			DataInputStream dis = new DataInputStream(new ByteArrayInputStream(packet.data));
@@ -508,7 +505,7 @@ public class AddonManager extends FCAddOn
 			if (packet.channel.equals("DECO|OLDGLASS")) {
 				int size = dis.readInt();
 				int damage = dis.readInt();
-								
+
 				ItemStack stack = new ItemStack(30008+256,size,damage);
 				epmp.inventory.setInventorySlotContents(epmp.inventory.currentItem, stack);
 			}

@@ -44,7 +44,7 @@ public class Addon_HayBale
 				if (world.rand.nextFloat()<=v)
 					dropBlockAsItem_do(world, X, Y, Z, new ItemStack(Item.wheat));
 		}
-		
+
 		@Override public int GetFacing(IBlockAccess access, int X, int Y, int Z)
 		{
 			return access.getBlockMetadata(X,Y,Z);
@@ -95,7 +95,7 @@ public class Addon_HayBale
 		@Override public void onBlockPlacedBy(World var1, int var2, int var3, int var4, EntityLiving var5, ItemStack var6)
 		{/*
 			int var7 = FCUtilsMisc.ConvertPlacingEntityOrientationToBlockFacing(var5);
-			
+
 			if(var7<2)var7=0;
 			else if(var7<4)var7=1;
 			else var7=2;
@@ -135,7 +135,7 @@ public class Addon_HayBale
 				r.SetUvRotateWest(1);
 				r.SetUvRotateEast(1);
 			default:
-				
+
 			}
 			r.setRenderBounds(0D,0D,0D,1D,1D,1D);
 			r.renderStandardBlock(this, X, Y, Z);

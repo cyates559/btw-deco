@@ -14,7 +14,7 @@ public class Addon_WhiteBrick
 		AddonManager.Register(whiteBrickStairs, "White Stone Brick Stairs");
 
 		AddonManager.NameSubBlocks_Wall(whiteBrickSidingAndCorner, whiteBrickMouldingAndDecorative, "White Stone Brick");
-	
+
 		FCRecipes.AddRecipe(new ItemStack(whiteStoneBrick,4,0), new Object[]{"XX","XX",'X',new ItemStack(FCBetterThanWolves.fcAestheticOpaque,1,9)});
 		FCRecipes.AddAnvilRecipe(new ItemStack(whiteStoneBrick, 12, 3), new Object[] {"####", "#  #", "#  #", "####", '#', whiteStoneBrick});
 		FCRecipes.AddSubBlockRecipesOfType(whiteStoneBrick, 0, whiteBrickSidingAndCorner, whiteBrickMouldingAndDecorative, true);
@@ -54,7 +54,6 @@ public class Addon_WhiteBrick
 	}
 	public static class FCBlockSidingAndCornerAndDecorative_Wall extends FCBlockSidingAndCornerAndDecorative
 	{
-
 		public FCBlockSidingAndCornerAndDecorative_Wall(int var1, Material var2, String var3, float var4, float var5, StepSound var6, String var7, String OriginalName)
 		{
 			super(var1, var2, var3, var4, var5, var6, var7);
@@ -63,7 +62,6 @@ public class Addon_WhiteBrick
 		}
 		public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
 		{
-
 			if(par1IBlockAccess.getBlockMetadata(par2,par3,par4) != 14)
 			{
 				super.setBlockBoundsBasedOnState(par1IBlockAccess, par2, par3, par4);
