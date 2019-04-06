@@ -91,13 +91,13 @@ public class Addon_Chairs
 		}
 		@Override public int onBlockPlaced(World world, int var2, int var3, int var4, int var5, float var6, float var7, float var8, int var9)
 		{
-			if (var5 < 2)
+			/*if (var5 < 2)
 			{
 				var5 = 2;
 			} else
 			{
 				var5 = FCUtilsMisc.GetOppositeFacing(var5);
-			}
+			}*/
 			return SetFacing(var9, var5);
 		}
 		@Override public void onBlockPlacedBy(World world, int var2, int var3, int var4, EntityLiving var5, ItemStack var6)

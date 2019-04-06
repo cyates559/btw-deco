@@ -21,5 +21,4 @@ public class Addon_Diamondium
 
 		AddonManager.MakeStorage(FCBetterThanWolves.fcItemIngotDiamond, blockDiamondium);
 	}
-	
 }

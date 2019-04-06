@@ -14,7 +14,6 @@ public class Addon_Glass
 		glassChunk = new Item(30002).setUnlocalizedName("ginger_glassball").setCreativeTab(CreativeTabs.tabMaterials);
 		glassStained = new BlockStainedGlass(3003);
 		AddonManager.Name(glassChunk, "Piece of Glass");
-		
 
 		FCRecipes.AddStokedCrucibleRecipe(new ItemStack(Block.glass, 1), new ItemStack[] {new ItemStack(glassChunk, 4)});
 		FCRecipes.AddStokedCrucibleRecipe(new ItemStack(glassChunk, 1), new ItemStack[] {new ItemStack(FCBetterThanWolves.fcItemPileSand)});
@@ -41,22 +40,21 @@ public class Addon_Glass
 			setUnlocalizedName("ginger_glass_");
 			AddonManager.Register(this, new String[] { "black", "red", "green", "brown", "blue", "purple", "cyan", "lightGrey", "grey", "pink", "lime", "yellow", "lightBlue", "magenta", "orange", "white" }, new String[] { "Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "Light Grey", "Grey", "Pink", "Lime", "Yellow", "Light Blue", "Magenta", "Orange", "White" }, " Stained Glass Block");
 		}
-		
+
 		@Override
 		public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving,
 				ItemStack par6ItemStack) {
-			
 			if (par5EntityLiving instanceof EntityPlayer) {
 				EntityPlayer ep = (EntityPlayer)par5EntityLiving;
 				if (ep.inventory.getCurrentItem().itemID != 3003)
-					return;				
+					return;
 			}
-			
+
 			sendClientOldGlassBlockMessage(par6ItemStack.stackSize-1, par6ItemStack.getItemDamage());
-			
+
 			super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLiving, par6ItemStack);
 		}
-		
+
 		public void sendClientOldGlassBlockMessage(int size, int damage) {
 			try {
 				ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -70,7 +68,7 @@ public class Addon_Glass
 				e.printStackTrace();
 			}
 		}
-		
+
 		public int damageDropped(int Meta)
 		{
 			return Meta;

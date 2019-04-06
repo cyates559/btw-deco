@@ -1,7 +1,6 @@
 package net.minecraft.src;
 public class Addon_Walls
 {
-	
 	public Addon_Walls()
 	{
 		FCBetterThanWolves.fcBlockStoneBrickSidingAndCorner = new AddonManager.FCBlockSidingAndCornerAndDecorative_Wall(AddonManager.ReplaceBlockID(FCBetterThanWolves.fcBlockStoneBrickSidingAndCorner),  Material.rock, "fcBlockDecorativeStoneBrick", 1.5F, 10.0F, Block.soundStoneFootstep, "fcStoneBrickSiding", "Stone Brick");

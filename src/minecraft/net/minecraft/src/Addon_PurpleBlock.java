@@ -3,6 +3,5 @@ public class Addon_PurpleBlock
 {
 	public Addon_PurpleBlock()
 	{
-		
 	}
 }

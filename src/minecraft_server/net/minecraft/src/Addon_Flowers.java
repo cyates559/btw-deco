@@ -39,12 +39,12 @@ public class Addon_Flowers
 //recipes//
 		//Change flowerpot recipe
 		FCRecipes.RemoveVanillaRecipe(new ItemStack(Item.flowerPot, 1), new Object[] {"# #", " # ", '#', Item.brick});
-		FCRecipes.AddShapelessRecipe(new ItemStack(Item.flowerPot, 1), new ItemStack[]{new ItemStack(FCBetterThanWolves.fcItemPileDirt), new ItemStack(FCBetterThanWolves.fcUrn)});
+		FCRecipes.AddShapelessRecipe(new ItemStack(Item.flowerPot, 1), new ItemStack[]{new ItemStack(FCBetterThanWolves.fcItemPileDirt), new ItemStack(FCBetterThanWolves.fcItemUrn)});
 		for (int i = 0; i < 16; ++i)
 			FCRecipes.AddShapelessRecipe(new ItemStack(Block.cloth, 1, BlockCloth.getDyeFromBlock(i)), new Object[] {new ItemStack(Item.dyePowder, 1, i+16), new ItemStack(Item.itemsList[Block.cloth.blockID], 1, 0)});
 		
 		//Fertilizer
-		FCRecipes.AddShapelessRecipe(new ItemStack(fertilizer, 2), new ItemStack[] { new ItemStack(Item.dyePowder, 1, 15), new ItemStack(FCBetterThanWolves.fcDung) });
+		FCRecipes.AddShapelessRecipe(new ItemStack(fertilizer, 2), new ItemStack[] { new ItemStack(Item.dyePowder, 1, 15), new ItemStack(FCBetterThanWolves.fcItemDung) });
 
 		//Flower Recipes
 
@@ -234,7 +234,7 @@ public class Addon_Flowers
 			super(ID);
 			setUnlocalizedName("ginger_fertilizer");
 			setCreativeTab(CreativeTabs.tabMaterials);
-			SetBellowsBlowDistance(FCBetterThanWolves.fcCoalDust.GetBellowsBlowDistance(0));
+			SetBellowsBlowDistance(FCBetterThanWolves.fcItemCoalDust.GetBellowsBlowDistance(0));
 			AddonManager.Name(this, "Fertilizer");
 		}
 		@Override public boolean onItemUse(ItemStack var1, EntityPlayer var2, World var3, int var4, int var5, int var6, int var7, float var8, float var9, float var10)
